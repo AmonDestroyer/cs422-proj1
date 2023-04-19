@@ -121,12 +121,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # static directory contains three subdirectories: css, js, and images
 # STATICFILES_DIRS tells Django that there are static files in the subdirectories of static
 STATICFILES_DIRS = [ 
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'TSProject', 'static')
 ]
 
 # Default primary key field type
