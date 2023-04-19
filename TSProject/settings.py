@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 
 # static directory contains three subdirectories: css, js, and images
 # STATICFILES_DIRS tells Django that there are static files in the subdirectories of static
-STATICFILES_DIR = [ 
+STATICFILES_DIRS = [ 
     os.path.join(BASE_DIR, 'static')
 ]
 
