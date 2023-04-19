@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('TimeSeries.urls')),
+    path('', include('time_series.urls', namespace='time_series')),
+    path('login/', include('roles.urls')),
     path('admin/', admin.site.urls),
 ]
