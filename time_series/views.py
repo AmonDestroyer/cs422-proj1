@@ -3,6 +3,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+def redirect_home(request):
+  return redirect('home/')
+
 def home_page(request):
   return render(request, 'index.html') 
 
@@ -15,5 +18,5 @@ def mle(request):
 def admin(request):
   return render(request, 'admin.html')  
 
-def _404_handler(request, nonexisting_path):
-  return render(request, '404.html')
+def login(request):
+  return redirect('roles:login')
