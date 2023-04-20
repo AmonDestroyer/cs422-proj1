@@ -11,21 +11,22 @@
     <title>Contributor</title>
 </head>
 <body>
-    <!-- <div>
-        <h1>Time Series Data Upload</h1>
-        <form>
-            <label for="file-upload">Choose a file</label>
-            <input type="file" id="file-upload" name="file-upload" accept=".csv, .txt, .xlsx">
-            <span id="fileName"></span></p>
-            <button type="submit" id="submit">Upload</button>
-        </form>
-    </div> -->
+    <div>
+        <a href="index.html">
+            <img src="../icon/home.png">
+        </a>
+    </div>
     <div>
         <h1>Time Series Data Upload</h1>
         <!-- File input to select files -->
         <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx" onchange="return fileValidation()"/>
         <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" id="dateSelector"/>
         <button type="button" id="upload">Upload</button>
+    </div>
+    <div>
+        <a href="index.html">
+            <img src="../icon/back.png">
+        </a> 
     </div>
     <script src="app.js"></script>
 </body>
