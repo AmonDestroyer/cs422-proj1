@@ -1,4 +1,5 @@
-# cs422-proj1
+<<<<<<< HEAD
+# CS-422
 This repository contains all work done for the CS 422 project 1.
 
 # Instructions for setting up environment
@@ -13,3 +14,6 @@ python3 manage.py runserver
 developoment server should be found at localhost:8000
 
 
+=======
+# CS-422
+>>>>>>> main

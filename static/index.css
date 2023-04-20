@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300&family=Montserrat:wght@300&display=swap');
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  max-width: 80rem;
+  margin-inline: auto;
+}
+#main{
+    max-width: 100%;
+    margin-top: 10px ;
+    height: auto;
+}
+header {
+    color: #222222;
+    display: fixed;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+    padding-top: 25px;
+  }
+
+  #intro{
+    font-family: 'Montserrat', sans-serif;
+    display: flex; 
+    text-align: left;
+    padding:10px;
+  }
+  
+  #background{
+    display:flex;
+    height: auto;
+    margin-top: 2%;
+    float:left;
+  }
+
+
+ul {
+    list-style-type: none;
+    display: flex;
+    overflow: hidden;
+    background-color: #7C96AB;
+    display: inline-block;
+    width:100%;
+}
+
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #B7B7B7;
+} 
+
+h1 {
+    color: #222222;
+    font-size: 36px;
+    font-weight: bold;
+}
+  
+  h2 {
+    color: #222222;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+  
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  #intro {
+    text-align: justify;
+  }
+  
+  #logins{
+    text-align: center;
+    background-color: #7C96AB; /* set the background color */
+    color: white; /* set the font color */
+    border: none; /* remove the border */
+    border-radius: 5px; /* round the corners */
+    padding: 30px 30px; /* add padding to make the button more clickable */
+    font-size: 30px; /* set the font size */
+    cursor: pointer; /* add a pointer cursor on hover */
+    margin: auto;
+    text-decoration: none;
+    display: block;
+    justify-self: center;
+    align-items: center;
+    width: 30%;
+  }
+
+  #login{
+    display: flex;
+    text-align: center;
+    background-color: #7C96AB; /* set the background color */
+    color: white; /* set the font color */
+    border: none; /* remove the border */
+    border-radius: 5px; /* round the corners */
+    padding: 10px 20px; /* add padding to make the button more clickable */
+    font-size: 16px; /* set the font size */
+    cursor: pointer; /* add a pointer cursor on hover */
+    margin: auto;
+    text-decoration: none
+  }
+  
+  #login:hover {
+    background-color: #B7B7B7; /* change the background color on hover */
+  }
+  
+  
+  #features {
+    margin-top: 50px;
+  }
+  
+  #features h2 {
+    text-align: center;
+    color: #222222;
+  }
+  
+  #features p {
+    margin-top: 20px;
+  }
+  
+  #back{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
