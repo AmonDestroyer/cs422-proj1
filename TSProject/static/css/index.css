@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300&family=Montserrat:wght@300&display=swap');
-
 html {
   scroll-behavior: smooth;
 }
 
+body{
+  max-width: 80rem;
+  margin-inline: auto;
+}
 #main{
     max-width: 100%;
     margin-top: 10px ;
@@ -17,15 +20,13 @@ header {
     font-weight: bold;
     float: left;
     padding-top: 25px;
-    
   }
 
   #intro{
     font-family: 'Montserrat', sans-serif;
     display: flex; 
     text-align: left;
-    padding-right: 15%;
-    padding-left:2%;
+    padding:10px;
   }
   
   #background{
@@ -66,7 +67,6 @@ h1 {
     color: #222222;
     font-size: 36px;
     font-weight: bold;
-    padding-left:2%;
 }
   
   h2 {
@@ -86,7 +86,26 @@ h1 {
     text-align: justify;
   }
   
+  #logins{
+    text-align: center;
+    background-color: #7C96AB; /* set the background color */
+    color: white; /* set the font color */
+    border: none; /* remove the border */
+    border-radius: 5px; /* round the corners */
+    padding: 30px 30px; /* add padding to make the button more clickable */
+    font-size: 30px; /* set the font size */
+    cursor: pointer; /* add a pointer cursor on hover */
+    margin: auto;
+    text-decoration: none;
+    display: block;
+    justify-self: center;
+    align-items: center;
+    width: 30%;
+  }
+
   #login{
+    display: flex;
+    text-align: center;
     background-color: #7C96AB; /* set the background color */
     color: white; /* set the font color */
     border: none; /* remove the border */
@@ -95,7 +114,7 @@ h1 {
     font-size: 16px; /* set the font size */
     cursor: pointer; /* add a pointer cursor on hover */
     margin: auto;
-  
+    text-decoration: none
   }
   
   #login:hover {
@@ -122,3 +141,4 @@ h1 {
     bottom: 20px;
     right: 20px;
   }
+  
