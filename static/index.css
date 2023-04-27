@@ -1,144 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300&family=Montserrat:wght@300&display=swap');
-html {
-  scroll-behavior: smooth;
-}
-
 body{
-  max-width: 80rem;
+  max-width: 55rem;
   margin-inline: auto;
+  align-items: center;
 }
-#main{
-    max-width: 100%;
-    margin-top: 10px ;
-    height: auto;
+
+
+#background {
+  background-color: #7C96AB;
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
 }
-header {
-    color: #222222;
-    display: fixed;
-    padding: 20px;
+
+#lightbox{
+  background-color: #F0F0F0;
+  height:500px;
+  width: 500px;
+  border: 3px solid #B7B7B7;
+  border-radius: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle; 
+}
+
+
+#mountain img {
+  vertical-align: middle;
+}
+
+.user-group {
+  text-decoration: none;
+  display: flex;
+  margin-top:130px;
+  justify-content: center;
+}
+
+h1{
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight:300;
+  text-align: center;
+}
+
+#user{
+  flex-wrap: wrap;
+  display:flex;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #7C96AB; /* set the background color */
+  color: white; /* set the font color */
+  border: none; /* remove the border */
+  border-radius: 5px; /* round the corners */
+  padding: 10px 20px; /*add padding to make the button more clickable*/
+  font-size: 16px; /* set the font size */
+  cursor: pointer; /* add a pointer cursor on hover */
+  margin: 10px;
+  justify-content: center;
+  text-decoration: none;
+}
+
+#user:hover {
+  background-color: #B7B7B7; /* change the background color on hover */
+}
+
+
+
+#Home {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+#Home img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+
+
+img {
+  width: 30px;
+  height: 30px;
+  margin-top: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.2);
+}
+
+
+
+@media only screen and (max-width: 900px) and (max-height: 800px){
+  h1{
     font-size: 30px;
-    font-weight: bold;
-    float: left;
-    padding-top: 25px;
   }
-
-  #intro{
-    font-family: 'Montserrat', sans-serif;
-    display: flex; 
-    text-align: left;
-    padding:10px;
-  }
-  
-  #background{
-    display:flex;
-    height: auto;
-    margin-top: 2%;
-    float:left;
-  }
-
-
-ul {
-    list-style-type: none;
+  .user-group-container {
     display: flex;
-    overflow: hidden;
-    background-color: #7C96AB;
-    display: inline-block;
-    width:100%;
-}
-
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #B7B7B7;
-} 
-
-h1 {
-    color: #222222;
-    font-size: 36px;
-    font-weight: bold;
-}
-  
-  h2 {
-    color: #222222;
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 50px;
-  }
-  
-  p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-top: 20px;
-  }
-  
-  #intro {
-    text-align: justify;
-  }
-  
-  #logins{
-    text-align: center;
-    background-color: #7C96AB; /* set the background color */
-    color: white; /* set the font color */
-    border: none; /* remove the border */
-    border-radius: 5px; /* round the corners */
-    padding: 30px 30px; /* add padding to make the button more clickable */
-    font-size: 30px; /* set the font size */
-    cursor: pointer; /* add a pointer cursor on hover */
-    margin: auto;
-    text-decoration: none;
-    display: block;
-    justify-self: center;
+    flex-direction: column;
     align-items: center;
-    width: 30%;
+  }
+  .user-group {
+    margin-top: 80px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .user-group a {
+    margin: 5px;
   }
 
-  #login{
-    display: flex;
-    text-align: center;
-    background-color: #7C96AB; /* set the background color */
-    color: white; /* set the font color */
-    border: none; /* remove the border */
-    border-radius: 5px; /* round the corners */
-    padding: 10px 20px; /* add padding to make the button more clickable */
-    font-size: 16px; /* set the font size */
-    cursor: pointer; /* add a pointer cursor on hover */
-    margin: auto;
-    text-decoration: none
+  #lightbox {
+    overflow-y: scroll;
+    overflow-x: scroll;
   }
-  
-  #login:hover {
-    background-color: #B7B7B7; /* change the background color on hover */
-  }
-  
-  
-  #features {
-    margin-top: 50px;
-  }
-  
-  #features h2 {
-    text-align: center;
-    color: #222222;
-  }
-  
-  #features p {
-    margin-top: 20px;
-  }
-  
-  #back{
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-  }
-  
+}
+
+
+
+
+
+

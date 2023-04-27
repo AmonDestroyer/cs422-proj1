@@ -16,9 +16,19 @@
             <img src="{% static 'icon/home.png' %}">
         </a>
     </div>
-    
-    <h1>Welcome to the MLE Dashboard</h1>
-    <button id="problem">Request Problem</button>
+    <div id="background"></div>
+    <div id="container">
+        <h1>Welcome to the MLE Dashboard</h1>
+        <p>Get started below by picking a solution and start working. Once you have completed your
+            solution, you may upload it here to get your calculation results.
+        </p>
+        <button id="problem">Request Problem</button>
+        <div>
+            <a href="login.html">
+                <img src="../icon/back.png">
+            </a> 
+        </div>
+    </div>
     <div id="light-box">
         <div id="content">
             <div class="page">
@@ -29,6 +39,7 @@
                     errors. 
                 </p>
                 <div>
+                    <h2>Choosing your Problem</h2>
                     Problems are displayed here.
                     <button class="next">Next</button>
                 </div>
@@ -48,17 +59,13 @@
                 <button class="next">Next</button>
             </div>
             <div class="page">
-                <p>Error Calculations</p>
+                <h1>Error Calculations</h1>
+                <p>Error calculations and other information will be displayed here. Currently not implemented.</p>
                 <button class="previous">Back</button>
                 
             </div>
             <button id="close">Exit</button>
         </div>
-    </div>
-    <div>
-        <a href="/login">
-            <img src="{% static 'icon/back.png' %}">
-        </a> 
     </div>
     <script src="{% static 'js/lightbox.js' %}"></script>
 

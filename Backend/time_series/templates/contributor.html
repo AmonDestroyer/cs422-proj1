@@ -13,22 +13,29 @@
     <title>Contributor</title>
 </head>
 <body>
-    <div>
+    <div id="Home">
         <a href="/home">
             <img src="{% static 'icon/home.png' %}">
         </a>
     </div>
-    <div>
+    <div id="background"></div>
+    <div id="container">
         <h1>Time Series Data Upload</h1>
         <!-- File input to select files -->
-        <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx, .JSON, .exel"/>
-        <button type="button" id="upload">Upload</button>
+        <div id="container-content">
+            <p>To upload your time series data, ensure it's in a compatible format, select the file 
+                to upload on the upload page, review the data, and upload it. The data will be available
+                 for analysis by others in the system to upload solutions to.</p>
+            <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx, .JSON, .exel" onchange="return fileValidation()"/>
+            <button type="button" id="upload">Upload</button>
+            <div>
+                <a href="/login">
+                    <img src="{% static 'icon/back.png' %}">
+                </a> 
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="/login">
-            <img src="{% static 'icon/back.png' %}">
-        </a> 
-    </div>
+
     <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

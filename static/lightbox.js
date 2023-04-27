@@ -3,7 +3,7 @@ const lightbox = document.getElementById("light-box");
 const exit = document.getElementById("close");
 
 const next_ = document.querySelectorAll(".next");
-const back_ = document.querySelectorAll("previous");
+const back_ = document.querySelectorAll(".previous");
 const pages = document.querySelectorAll(".page");
 
 let pageNumber = 0;
@@ -33,7 +33,7 @@ function prevPage(){
     if(pageNumber < 0){
         pageNumber = pages.length - 1;
     }
-    showPage(pageNumer);
+    showPage(pageNumber);
 }
 
 
@@ -55,7 +55,7 @@ next_.forEach(function(element) {
     });
   });
   
-  back_.forEach(function(element) {
+back_.forEach(function(element) {
     element.addEventListener("click", function(e){
       prevPage();
     });
