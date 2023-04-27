@@ -21,18 +21,20 @@
     <button id="problem">Request Problem</button>
     <div id="light-box">
         <div id="content">
-            <h1>Time Series Problems</h1>
-            <p>To pick a time series problem and upload a solution, follow these steps: choose a problem 
-                that interests you, gather and preprocess relevant data, analyze the data using appropriate 
-                techniques, build a solution based on your analysis, and finally, upload your solution to compare
-                errors. 
-            </p>
-            <div id="tm-display-1">
-                Problems are displayed here.
-                <button id="next">Next</button>
+            <div class="page">
+                <h1>Time Series Problems</h1>
+                <p>To pick a time series problem and upload a solution, follow these steps: choose a problem 
+                    that interests you, gather and preprocess relevant data, analyze the data using appropriate 
+                    techniques, build a solution based on your analysis, and finally, upload your solution to compare
+                    errors. 
+                </p>
+                <div>
+                    Problems are displayed here.
+                    <button class="next">Next</button>
+                </div>
             </div>
 
-            <div id ="submit-projection">
+            <div class="page">
                 <h1>Uploading your solution</h1>
                 <p>To ensure the accuracy of your data analysis results, it's essential to check them against the 
                     original data. After developing a solution, you can test it against a separate set of data or 
@@ -42,14 +44,16 @@
                     your solution compares.
                 </p>
                 <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx" onchange="return fileValidation()"/> 
-                <button id="previous">Back</button>
-                <button id="next">Next</button>
+                <button class="previous">Back</button>
+                <button class="next">Next</button>
+            </div>
+            <div class="page">
+                <p>Error Calculations</p>
+                <button class="previous">Back</button>
+                
             </div>
             <button id="close">Exit</button>
         </div>
-    </div>
-    <div id="error-checking">
-        <p>Will display the final errors here</p>
     </div>
     <div>
         <a href="/login">
