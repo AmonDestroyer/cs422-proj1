@@ -10,5 +10,9 @@ urlpatterns = [
   path('mle/', views.mle, name='mle_html'),
   path('admin/', views.admin, name='admin_html'),
   
+  # POST urls
+  path('_upload-data/', views.upload_data), # name subject to change
+  
+  
   path('home/login/', views.login),
 ]
