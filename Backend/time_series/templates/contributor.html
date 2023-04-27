@@ -9,6 +9,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <title>Contributor</title>
 </head>
@@ -26,8 +28,10 @@
             <p>To upload your time series data, ensure it's in a compatible format, select the file 
                 to upload on the upload page, review the data, and upload it. The data will be available
                  for analysis by others in the system to upload solutions to.</p>
-            <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx, .JSON, .exel" onchange="return fileValidation()"/>
+            <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx, .JSON, .xls"/>
             <button type="button" id="upload">Upload</button>
+            <p id="upSuccess" style="display: none; color: green">Success: file was uploaded </p>
+            <p id="upError" style="display: none; color: red">Error: file was not uploaded, check console for details</p>
             <div>
                 <a href="/login">
                     <img src="{% static 'icon/back.png' %}">
