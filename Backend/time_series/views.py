@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-# from upload import upload_file
+from .upload import upload_train_test_to_db
 
 def redirect_home(request):
   return redirect('home/')
@@ -31,12 +31,17 @@ def upload_data(request):
   if request.method == 'POST':
 
     jsonStr = request.body
-    print(jsonStr)
-    # call function to process uploaded file - send request.body to function
-
-    return render(request, 'contributor.html')
+    # print(jsonStr)
     
-
+    # call function to process uploaded file - send request.body to function
+    response = upload_train_test_to_db(jsonStr)
+    
+    if response[0] == 0:
+      print(response[1])
+      return HttpResponse(response[1], status=400)
+    else:
+      # return render(request, 'contributor.html')
+      return HttpResponse(response[1], status=200)
 
   else: # GET request - redirect to home page since this is not a valid request
     return redirect('../home/')
