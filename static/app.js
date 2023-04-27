@@ -10,7 +10,7 @@ function fileValidation(){
     const fileExtension = filePath.substring(filePath.indexOf('.') + 1).toLowerCase();
 
     //Check for file extension validation
-    if (fileExtension === 'txt' || fileExtension === 'cvs' || fileExtension === 'xlsx'
+    if (fileExtension === 'txt' || fileExtension === 'csv' || fileExtension === 'xlsx'
      || fileExtension === 'excel' || fileExtension === "JSON") {
         console.log("File accepted")
     }
