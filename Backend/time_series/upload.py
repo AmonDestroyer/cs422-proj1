@@ -16,22 +16,28 @@ def upload_train_test_to_db(request_body):
     with transaction.atomic():
       # Create TimeUnit object using TimeUnit object and data from set_meta - add to the database
       # Save the instance of this object to time_unit_instance which will be used for other objects
-      time_unit_instance = TimeUnit.objects.create(tu_id=id, unit_name='min') 
+      time_unit = TimeUnit.objects.create(unit_name='min') 
+      
+      # INCOMPLETE #
+      # Create SetType object using SetType object and data from set_meta - add to the database
+      # This tells what type of set was uploaded (train, test)
+      set_type = SetType.objects.create(set_type='TEMP') # Need to change temp to set_meta['_']
+      # INCOMPLETE # 
       
       # Create TS_Set object using TS_Set object and data from set_meta
       # objects.create() creates the object and then saves it to the database
       # ts_set is an instance of the TS_Set class that is in the database
-      
-      
       ts_set = TS_Set.objects.create(
-        set_id=id,
         set_name=set_meta['TS Set Name'],
         description=set_meta['Description'],
         vector_size=set_meta['Vector Size'],
         min_length=set_meta['Min Length'],
         max_length=set_meta['Max Length'],
         num_ts=set_meta['Number of TS in the Set'],
-        time_unit=time_unit_instance,
+        start_datetime=set_meta['Start Datetime'],
+        error=None, # No error is sent when uploading train/test sets
+        tu_id=time_unit,
+        set_type_id=set_type
       )
       
       
@@ -39,7 +45,6 @@ def upload_train_test_to_db(request_body):
       # objects.create() creates the object and then saves it to the database
       # ts_timeseries is an instance of the TimeSeries class that is in the database
       timeseries = TimeSeries.objects.create(
-        ts_id=id,
         ts_name=ts_meta['TS Name'],
         description=ts_meta['Description'],
         y_unit=ts_meta['Units'],
@@ -56,22 +61,21 @@ def upload_train_test_to_db(request_body):
       # each TS_Measurement object ts_id links it to the timeseries that was created above
       for _, temp in series_data.items():
         TS_Measurement.objects.create(
-          tsm_id=id,
           x_val=temp,
           ts_id=timeseries # links the TS_Measurement object to the TimeSeries object (row in table) that was created above
         )
-        id=id + 1 
+      
       
       # Additional meta data for TS_Set that will be joined
-      set_domain = Domain.objects.create(domain_id=id, domain_name=set_meta['Application Domain(s)'])
-      set_keyword = Keyword.objects.create(keyword_id=id, keyword=set_meta['Keywords'])
-      contributor = Contributor.objects.create(contrib_id=id, contrib_fname=set_meta['Contributors']) # Needs to be fixed later (need to split first and last name)
-      paper = Paper.objects.create(paper_id=id, paper_reference=set_meta['Related Paper Reference(s)'], paper_link=set_meta['Related Paper Link'])
+      set_domain = Domain.objects.create(domain_name=set_meta['Application Domain(s)'])
+      set_keyword = Keyword.objects.create(keyword=set_meta['Keywords'])
+      contributor = Contributor.objects.create(contrib_fname=set_meta['Contributors']) # Needs to be fixed later (need to split first and last name)
+      paper = Paper.objects.create(paper_reference=set_meta['Related Paper Reference(s)'], paper_link=set_meta['Related Paper Link'])
       
       id = id + 1 
       # Additional meta data for TimeSeries that will be joined
-      series_domain = Domain.objects.create(domain_id=id, domain_name=ts_meta['Domain(s)'])
-      series_keyword = Keyword.objects.create(keyword_id=id, keyword=ts_meta['Keywords'])
+      series_domain = Domain.objects.create(domain_name=ts_meta['Domain(s)'])
+      series_keyword = Keyword.objects.create(keyword=ts_meta['Keywords'])
       
       
       # Set joiners
@@ -84,7 +88,6 @@ def upload_train_test_to_db(request_body):
       TimeseriesDomain_Join.objects.create(domain_id=series_domain, ts_id=timeseries)
       TimeseriesKeyword_Join.objects.create(keyword_id=series_keyword, ts_id=timeseries)
       
-      id = id + 1
       return 1, 'Success'
   except Exception as e:
     return 0, e

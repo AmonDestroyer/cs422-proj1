@@ -1,70 +1,86 @@
 from django.db import models
 
 # Create your models here.
+# All models (classes) follow the sql schema created from our sql file
+# All models will be used to create a python object which will then be passed into the database as a row to
+# their respective tables
 
 class TimeUnit(models.Model):
-  tu_id = models.IntegerField(primary_key=True)
-  unit_name = models.CharField(max_length=45, null=True)
+  tu_id = models.AutoField(primary_key=True) # Creates an auto-incrementing primary key (starts at 1)
+  unit_name = models.CharField(max_length=1000, null=True) # 
   
   class Meta:
-    db_table = 'Time Unit'
+    db_table = 'Time Unit' # Used to specify the name of the table in the database
+
+
+class SetType(models.Model):
+  set_type_id = models.AutoField(primary_key=True)
+  set_type = models.CharField(max_length=1000, null=True)
+
+  class Meta:
+    db_table = 'Set Type'
 
 
 class TS_Set(models.Model):
-  set_id = models.IntegerField(primary_key=True, db_column='set_id')
-  set_name = models.CharField(max_length=200, null=True)
+  set_id = models.AutoField(primary_key=True)
+  set_name = models.CharField(max_length=1000, null=True)
   description = models.CharField(max_length=1000, null=True)
   vector_size = models.IntegerField(null=True)
   min_length = models.IntegerField(null=True)
   max_length = models.IntegerField(null=True)
   num_ts = models.IntegerField(null=True)
-  time_unit = models.ForeignKey(TimeUnit, on_delete=models.DO_NOTHING, db_column='Time Unit_tu_id')
+  start_datetime = models.DateTimeField(null=True)
+  error = models.FloatField(null=True)
+  tu_id = models.ForeignKey(TimeUnit, on_delete=models.DO_NOTHING, db_column='tu_id')
+  set_type_id = models.ForeignKey(SetType, on_delete=models.DO_NOTHING, db_column='set_type_id')
 
   class Meta:
     db_table = 'TS_Set'
 
+
 class TimeSeries(models.Model):
-  ts_id = models.IntegerField(primary_key=True)
-  ts_name = models.CharField(max_length=100, null=True)
+  ts_id = models.AutoField(primary_key=True)
+  ts_name = models.CharField(max_length=1000, null=True)
   description = models.CharField(max_length=1000, null=True)
-  y_unit = models.CharField(max_length=45, null=True)
+  y_unit = models.CharField(max_length=1000, null=True)
   scalar_vector = models.SmallIntegerField(null=True, db_column='scalar/vector')
   vector_size = models.IntegerField(null=True)
   length = models.IntegerField(null=True)
   sampling_period = models.IntegerField(null=True)
+  error= models.FloatField(null=True)
   set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_id')
   
   class Meta:
     db_table = 'Time Series'
-  
+    
 
 class Keyword(models.Model):
-  keyword_id = models.IntegerField(primary_key=True)
-  keyword = models.CharField(max_length=100, null=True)
+  keyword_id = models.AutoField(primary_key=True)
+  keyword = models.CharField(max_length=1000, null=True)
   
   class Meta:
     db_table = 'Keyword'
 
 
 class Contributor(models.Model):
-  contrib_id = models.IntegerField(primary_key=True)
-  contrib_fname = models.CharField(max_length=100, null=True)
-  contrib_lname = models.CharField(max_length=100, null=True)
+  contrib_id = models.AutoField(primary_key=True)
+  contrib_fname = models.CharField(max_length=1000, null=True)
+  contrib_lname = models.CharField(max_length=1000, null=True)
   
   class Meta:
     db_table = 'Contributor'
 
 
 class Domain(models.Model):
-  domain_id = models.IntegerField(primary_key=True)
+  domain_id = models.AutoField(primary_key=True)
   domain_name = models.CharField(max_length=1000, null=True)
   
   class Meta:
     db_table = 'Domain'
 
-
+ 
 class Paper(models.Model):
-  paper_id = models.IntegerField(primary_key=True)
+  paper_id = models.AutoField(primary_key=True)
   paper_reference = models.CharField(max_length=1000, null=True)
   paper_link = models.CharField(max_length=1000, null=True)
   
@@ -105,13 +121,14 @@ class TimeseriesKeyword_Join(models.Model):
     
 
 class TS_Measurement(models.Model):
-  tsm_id = models.IntegerField(primary_key=True)
+  tsm_id = models.AutoField(primary_key=True)
   x_val = models.IntegerField(null=True)
   y_val = models.FloatField(null=True)
-  ts_id = models.ForeignKey(TimeSeries, on_delete=models.DO_NOTHING, db_column='Time Series_ts_id')
+  ts_id = models.ForeignKey(TimeSeries, on_delete=models.DO_NOTHING, db_column='ts_id')
   
   class Meta:
     db_table = 'TS_Measurement'
+
 
 class TimeseriesDomain_Join(models.Model):
   domain_id = models.ForeignKey(Domain, on_delete=models.DO_NOTHING, db_column='domain_id')
@@ -127,3 +144,15 @@ class TimeseriesSetDomain_Join(models.Model):
   
   class Meta:
     db_table = 'TimeseriesSet-Domain_Join'
+
+
+# Currently not working - Django doesn't allow for multiple foreign keys to the same db_column
+"""
+# Link/Bridge test and training TS sets together
+class TestTrainingSolution_Join(models.Model):
+  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_id', related_name='training_set')
+  ts_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_name', related_name='test_set')
+  
+  class Meta:
+    db_table = 'Test-Training-Solution_Join'
+"""
