@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .upload import upload_set, TRAIN, SOLUTION, TEST
 from .download import get_train_data, get_solutions
 from .calculate import calculate_error
+from .models import TS_Set
 
 import json
 
@@ -50,19 +51,26 @@ def upload_data(request):
         print(response[1])
         return HttpResponse(response[1], status=400)
       
-      else:
+      else: # Upload test set
         response = upload_set(data=data_dict['testSet'], set_type=TEST, train_set=response[1])
-        if (response[0] == 0):
+        if (response[0] == 0): # Failed to upload
           print(response[1])
           return HttpResponse(response[1], status=400)
-        else:
+        else: # Successful upload of both sets
           return HttpResponse('Success', status=200)
     
-    # Check if a solution set was uploaded
-    # If so, calculate error then upload solution set
+    # Check if a solution set is being requested to be uploaded
     elif ('ProblemID' in data_dict):
       print("Recieved problem set")
-      return HttpResponse('Not-Implemented', status=200)
+      # Not sure how I feel about pulling from the db in this function
+      # However currently this will have to do
+      train_set = TS_Set.objects.get(set_id=data_dict['ProblemID']) 
+      response = upload_set(data=data_dict['Solution'], set_type=SOLUTION, train_set=train_set)
+      
+      if (response[0] == 0): # Failed to upload
+        return HttpResponse(response[1], status=400)
+      else:
+        return HttpResponse('Success', status=200)
 
   else: # GET request (or any other) - redirect to home page since this is not a valid request
     return redirect('../home/')
@@ -70,21 +78,7 @@ def upload_data(request):
 
 @csrf_exempt
 def upload_solution(request):
-  if request.method == 'POST':
-    jsonStr = request.body
-    
-    # Upload the solution set
-    # Need to make sure to pass in the ts_set_id of the train set
-    # request.body: {"ts set id": "num", "solution": "{data}"}
-    # might need to change around upload_set slightly so i can get both in
-    response = upload_set(jsonStr)
-    
-    # Response 1 will contain ts_set of the solution that was pushed
-    error = calculate_error(jsonStr["ts set id"], response[1])
-    
-    return HttpResponse('Success', status=200)
-  else: # GET request (or any other) - redirect to home page since this is not a valid request
-    return redirect('../home/')
+  return upload_data(request)
 
 
 ### Database GET request handlers ###

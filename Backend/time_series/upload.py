@@ -9,7 +9,7 @@ TEST = 'test'
 def upload_set(data, set_type, train_set=None):
   set_meta = data['setMeta'] # setMeta contains all the set's metadata - set_meta is the dictionary for that metadata
   ts_meta = data['seriesMeta'] # tsMeta contains the time series's metadata - ts_meta is the dictionary for that metadata
-  series_data = data['seriesData'] # seriesData contains the time series's data - series_data is the dictionary for that data
+  series_data = data['seriesData'] # seriesData contains the time series's data - series_data is the dictionary for that data 
   
   try:
     with transaction.atomic():
@@ -64,16 +64,11 @@ def upload_set(data, set_type, train_set=None):
         return 1, ts_set # TS set needs to be returned so that we can link
       
       else: # if set_type is not "train" then we want to link to the train set
-        # Need to change this to the id of the train set that this test set is associated with
-        # train_id = '1' # Most likely will need to be data['train_id'] or something like that
-        # Get TS_Set with train_id from table since this will be needed to link the two sets
-        # train_ts_set = TS_Set.objects.get(set_id=train_id)
-        
         # Create TestTrainingSolution_Join object using TestTrainingSolution_Join object
         # other_set is the set we just created (see line 30) and we link this to the train set
         TestTrainingSolution_Join.objects.create(training_set_id=train_set, other_set=ts_set)
         
-        return 1, ts_set
+        return 1, ts_set # ts_set returned here is the set that was uploaded
  
   except Exception as e:
     return 0, e
@@ -110,6 +105,7 @@ def create_time_series(ts_meta, ts_set):
         vector_size=ts_meta['Vector Size'],
         length=ts_meta['Length'],
         sampling_period=ts_meta['Sampling Period'],
+        error=ts_set.error,
         set_id=ts_set
       )
   
