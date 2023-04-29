@@ -1,3 +1,5 @@
+import json
+
 # Request Handler
 from django.views.decorators.csrf import csrf_exempt
 
@@ -31,17 +33,24 @@ def upload_data(request):
   if request.method == 'POST':
 
     jsonStr = request.body
-    # print(jsonStr)
+    parsed = json.loads(jsonStr)
+    testSet = parsed["testSet"]
+    trainSet = parsed["trainSet"]
+    print(testSet)
+    print('\n\n')
+    print(trainSet)
+    return HttpResponse("Success", status=200)
+
     
     # call function to process uploaded file - send request.body to function
-    response = upload_train_test_to_db(jsonStr)
+    # response = upload_train_test_to_db(jsonStr)
     
-    if response[0] == 0:
-      print(response[1])
-      return HttpResponse(response[1], status=400)
-    else:
-      # return render(request, 'contributor.html')
-      return HttpResponse(response[1], status=200)
+    # if response[0] == 0:
+    #   print(response[1])
+    #   return HttpResponse(response[1], status=400)
+    # else:
+    #   # return render(request, 'contributor.html')
+    #   return HttpResponse(response[1], status=200)
 
   else: # GET request - redirect to home page since this is not a valid request
     return redirect('../home/')
