@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .upload import upload_train_test_to_db
+from .download import get_train_data, get_solutions
 
 def redirect_home(request):
   return redirect('home/')
@@ -54,3 +55,13 @@ def upload_data(request):
 
   else: # GET request - redirect to home page since this is not a valid request
     return redirect('../home/')
+
+
+def train_data_download_request(request):
+  response = get_train_data(request.body)
+
+
+def get_solutions_request(request):
+  # request.body should be a json object containing set_id
+  response = get_solutions(request.body)
+  return HttpResponse('Success', status=200)
