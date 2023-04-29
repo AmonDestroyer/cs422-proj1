@@ -146,13 +146,10 @@ class TimeseriesSetDomain_Join(models.Model):
     db_table = 'TimeseriesSet-Domain_Join'
 
 
-# Currently not working - Django doesn't allow for multiple foreign keys to the same db_column
-"""
 # Link/Bridge test and training TS sets together
 class TestTrainingSolution_Join(models.Model):
-  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_id', related_name='training_set')
-  ts_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_name', related_name='test_set')
+  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='training_set_id', related_name='training_set')
+  other_set = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, default=40, related_name="other_set")
   
   class Meta:
     db_table = 'Test-Training-Solution_Join'
-"""
