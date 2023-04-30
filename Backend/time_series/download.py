@@ -2,47 +2,84 @@ import json
 from .models import *
 from django.db import transaction
 
-import logging
+from .upload import TRAIN, SOLUTION
 
-logger = logging.getLogger(__name__)
-
-def get_train_data(request_body):
+def get_train_data():
+  # Get all the train sets from the database
   
-  pass
+  ts_training_sets = TS_Set.objects.filter(set_type_id__set_type=TRAIN)
+  
+  response_dict = {}
+  count = 1
+  
+  for ts_set in ts_training_sets:
+    set_info = {}
+    set_info.update({
+      "set id": ts_set.set_id,
+      "set name": ts_set.set_name
+    })
+    
+    paper = Paper.objects.get(setpaper_join__set_id=ts_set)
+    
+    set_info.update({
+      "paper reference": paper.paper_reference,
+      "paper link": paper.paper_link
+    })
+    
+    contributor = Contributor.objects.get(setcontributor_join__set_id=ts_set)
+    
+    set_info.update({
+      "contributor first name": contributor.contrib_fname,
+      "contributor last name": contributor.contrib_lname
+    })
+    
+    response_dict[f"set{count}"] = set_info
+    count += 1
+  
+  print(json.dumps(response_dict))
+  
+  return 1
 
 def get_solutions(request_body):
   # data = json.loads(request_body)
   # set_id = request_body["set_id"]
 
-  set_id = '45' # Temporary for now, above code will be used later
+  set_id = '1' # Temporary for now, above code will be used later
   solutions_dict = {} # Contains all solutions
-  solution_dict = {} # Dictionary that will be returned to the frontend (converted to JSON) - stores sollution information
+  count = 1
   
   # Get the ts set from the database using set_id
-  ts_set = TS_Set.objects.get(set_id=set_id)
-  solution_dict.update({
-    "set name": ts_set.set_name,
-    "error": ts_set.error,
-  })
+  # ts_set = TS_Set.objects.get(set_id=set_id)
   
-  # Get the paper associated with this ts set
-  # use setpaper_join__set_id to get the paper associated with ts_set in the Set-Paper Join table
-  paper = Paper.objects.get(setpaper_join__set_id=ts_set)
-  solution_dict.update({
-    "paper reference": paper.paper_reference,
-    "paper link": paper.paper_link,
-  })
+  solution_sets = TS_Set.objects.filter(set_type_id__set_type=SOLUTION)
   
-  # Get the contributor associated with this ts set
-  # use setcontributor_join__set_id to get the contributor associated with ts_set in the Set-Contributor Join table
-  contributor = Contributor.objects.get(setcontributor_join__set_id=ts_set)
-  # contributor_id = contributor.contrib_id # not used
-  solution_dict.update({
-    "contributor first name": contributor.contrib_fname,
-    "contributor last name": contributor.contrib_lname,
-  })
+  for solution in solution_sets:
+    solution_info = {} # Dictionary that will be returned to the frontend (converted to JSON) - stores sollution information
+    solution_info.update({
+      "set name": solution.set_name,
+      "error": str(solution.error), # conver to string because JSOn doesn't accept DECIMAL
+    })
+    
+    # Get the paper associated with this ts set
+    # use setpaper_join__set_id to get the paper associated with ts_set in the Set-Paper Join table
+    paper = Paper.objects.get(setpaper_join__set_id=solution)
+    solution_info.update({
+      "paper reference": paper.paper_reference,
+      "paper link": paper.paper_link,
+    })
+    
+    # Get the contributor associated with this ts set
+    # use setcontributor_join__set_id to get the contributor associated with ts_set in the Set-Contributor Join table
+    contributor = Contributor.objects.get(setcontributor_join__set_id=solution)
+    # contributor_id = contributor.contrib_id # not used
+    solution_info.update({
+      "contributor first name": contributor.contrib_fname,
+      "contributor last name": contributor.contrib_lname,
+    })
   
-  solutions_dict["solution1"] = solution_dict
+    solutions_dict[f"solution{count}"] = solution_info
+    count += 1
+  
   print(json.dumps(solutions_dict))
 
-  return ts_set
+  return 1

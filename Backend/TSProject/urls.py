@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('time_series.urls', namespace='time_series')),
     path('login/', include('roles.urls')),
-    path('admin/', admin.site.urls),
+    path('admin1/', admin.site.urls),
 ]
