@@ -1,35 +1,74 @@
 #light-box {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 9999;
-}
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #F0F0F0;
+    border-radius: 30px;
+    z-index: 9999;
+  }
+  
+  #content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  
+  #lightbox h1{
+    font-family: 'Montserrat', sans-serif;
+  }
 
-#content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 600px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-  text-align: center;
-}
+  #content .page p{
+    font-family: 'Montserrat', sans-serif;
 
+  }
+  .page {
+    display: none;
+  }
+  
+  .page.active {
+    display: block;
+  }
+  #close {
+    margin-top: 20px;
+  }
+  
+  img {
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.2);
+  }
+  
 
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-#close {
-  margin-top: 20px;
-}
+.next, .previous, #close, #upload{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #7C96AB; /* set the background color */
+    color: white; /* set the font color */
+    border: none; /* remove the border */
+    border-radius: 5px; /* round the corners */
+    padding: 10px 20px; /*add padding to make the button more clickable*/
+    font-size: 16px; /* set the font size */
+    cursor: pointer; /* add a pointer cursor on hover */
+    margin: 10px; 
+  }
+  
+  .next:hover, .previous:hover, #close:hover, #upload:hover {
+    background-color: #B7B7B7; /* change the background color on hover */
+  }

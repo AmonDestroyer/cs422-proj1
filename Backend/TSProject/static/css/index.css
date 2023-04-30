@@ -4,7 +4,7 @@ html {
 }
 
 body{
-  max-width: 80rem;
+  max-width: 60rem;
   margin-inline: auto;
 }
 #main{
@@ -45,7 +45,6 @@ ul {
     display: inline-block;
     width:100%;
 }
-
 
 li {
     float: left;
@@ -92,35 +91,42 @@ h1 {
     color: white; /* set the font color */
     border: none; /* remove the border */
     border-radius: 5px; /* round the corners */
-    padding: 30px 30px; /* add padding to make the button more clickable */
-    font-size: 30px; /* set the font size */
+    padding: 10px 5px; /* add padding to make the button more clickable */
+    font-size: 20px; /* set the font size */
     cursor: pointer; /* add a pointer cursor on hover */
     margin: auto;
     text-decoration: none;
     display: block;
     justify-self: center;
     align-items: center;
-    width: 30%;
+    width: 20%;
+    margin-bottom: 30px;
   }
-
+  #logins:hover {
+    background-color: #B7B7B7; /* change the background color on hover */
+  }
+  
   #login{
-    display: flex;
-    text-align: center;
+    flex-wrap: wrap;
+    display:flex;
+    font-family: 'Montserrat', sans-serif;
     background-color: #7C96AB; /* set the background color */
     color: white; /* set the font color */
     border: none; /* remove the border */
     border-radius: 5px; /* round the corners */
-    padding: 10px 20px; /* add padding to make the button more clickable */
+    padding: 10px 20px; /*add padding to make the button more clickable*/
     font-size: 16px; /* set the font size */
     cursor: pointer; /* add a pointer cursor on hover */
-    margin: auto;
-    text-decoration: none
+    margin: 10px;
+    justify-content: center;
+    text-decoration: none;
   }
   
   #login:hover {
     background-color: #B7B7B7; /* change the background color on hover */
   }
-  
+
+
   
   #features {
     margin-top: 50px;
@@ -142,3 +148,7 @@ h1 {
     right: 20px;
   }
   
+
+
+  
+

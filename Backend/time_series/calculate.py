@@ -1,6 +1,6 @@
 from django.db import connection
 
-from sklearn.metrics import mean_squared_error
+# from sklearn.metrics import mean_squared_error
 from .models import *
 
 def calculate_error(solution_data, train_set_id):

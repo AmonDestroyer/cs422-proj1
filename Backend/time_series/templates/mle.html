@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mle.css' %}">
     <title>Document</title>
 </head>
 <body>
@@ -16,6 +16,7 @@
             <img src="{% static 'icon/home.png' %}">
         </a>
     </div>
+    
     <div id="background"></div>
     <div id="container">
         <h1>Welcome to the MLE Dashboard</h1>
@@ -29,14 +30,19 @@
             </a> 
         </div>
     </div>
+    
+    
     <div id="light-box">
         <div id="content">
             <div class="page">
                 <h1>Time Series Problems</h1>
-                <p>To pick a time series problem and upload a solution, follow these steps: choose a problem 
-                    that interests you, gather and preprocess relevant data, analyze the data using appropriate 
-                    techniques, build a solution based on your analysis, and finally, upload your solution to compare
-                    errors. 
+                <p>Picking a problem from the <a href="problem.html">Problems</a> page and uploading it to the MLE page helps to calculate 
+                    the error mean of the model. This step is crucial for model evaluation, as it identifies the 
+                    accuracy of the predictions and areas that require improvement. Regular testing with different 
+                    datasets allows for identifying and fixing errors, ensuring the model remains effective.
+                </p>
+                <p>Choose which problem you would like to solve from the <a href="problem.html">problems</a>
+                    page. Afte
                 </p>
                 <div>
                     <h2>Choosing your Problem</h2>
@@ -55,8 +61,11 @@
                     your solution compares.
                 </p>
                 <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx" onchange="return fileValidation()"/> 
-                <button class="previous">Back</button>
-                <button class="next">Next</button>
+                <button type="button" id="upload">Upload</button>
+                <div>
+                    <button class="previous">Back</button>
+                    <button class="next">Next</button>
+                </div>
             </div>
             <div class="page">
                 <h1>Error Calculations</h1>
