@@ -51,7 +51,7 @@ def get_solutions(request_body):
   # Get the ts set from the database using set_id
   # ts_set = TS_Set.objects.get(set_id=set_id)
   
-  solution_sets = TS_Set.objects.filter(set_type_id__set_type=SOLUTION)
+  solution_sets = TS_Set.objects.filter(set_type_id__set_type=SOLUTION) #, testtrainingsolution_join__training_set_id=set_id)
   
   for solution in solution_sets:
     solution_info = {} # Dictionary that will be returned to the frontend (converted to JSON) - stores sollution information
