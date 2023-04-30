@@ -1,6 +1,8 @@
 from .models import *
 from django.db import transaction
 
+from .calculate import calculate_error
+
 # Constants for set_type
 TRAIN = 'train' 
 SOLUTION = 'solution'
@@ -23,7 +25,7 @@ def upload_set(data, set_type, train_set=None):
       # Create TS_Set object using TS_Set object and data from set_meta
       # objects.create() creates the object and then saves it to the database
       # ts_set is an instance of the TS_Set class that is in the database
-      ts_set = create_ts_set(set_meta, time_unit, set_type_obj)
+      ts_set = create_ts_set(data, time_unit, set_type_obj, train_set=train_set)
       
       # Create TimeSeries object using TimeSeries object and data from ts_meta
       # objects.create() creates the object and then saves it to the database
@@ -66,7 +68,7 @@ def upload_set(data, set_type, train_set=None):
       else: # if set_type is not "train" then we want to link to the train set
         # Create TestTrainingSolution_Join object using TestTrainingSolution_Join object
         # other_set is the set we just created (see line 30) and we link this to the train set
-        TestTrainingSolution_Join.objects.create(training_set_id=train_set, other_set=ts_set)
+        TestTrainingSolution_Join.objects.create(training_set_id=train_set, other_set_id=ts_set)
         
         return 1, ts_set # ts_set returned here is the set that was uploaded
  
@@ -75,9 +77,15 @@ def upload_set(data, set_type, train_set=None):
   
   
  
-def create_ts_set(set_meta, time_unit, set_type_obj):
+def create_ts_set(data, time_unit, set_type_obj, train_set=None):
+  set_meta = data['setMeta']
+  
   error = None
   if (set_type_obj.set_type == SOLUTION):
+    series_data = data['seriesData']
+    # error = calculate_error(series_data, train_set.set_id)
+    # print(error)
+
     error = 1 # Need to calculate error here
   
   ts_set = TS_Set.objects.create(
