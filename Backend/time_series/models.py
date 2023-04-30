@@ -148,8 +148,9 @@ class TimeseriesSetDomain_Join(models.Model):
 
 # Link/Bridge test and training TS sets together
 class TestTrainingSolution_Join(models.Model):
-  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='training_set_id', related_name='training_set')
-  other_set = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, default=40, related_name="other_set")
-  
+  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='training_set_id', related_name='training_set_id')
+  other_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='other_set_id', related_name='other_set_id')
+
   class Meta:
     db_table = 'Test-Training-Solution_Join'
+    unique_together = (('training_set_id', 'other_set_id'),)
