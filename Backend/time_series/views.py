@@ -83,7 +83,8 @@ def upload_solution(request):
 
 ### Database GET request handlers ###
 def train_data_download_request(request):
-  response = get_train_data(request.body)
+  response = get_train_data()
+  return HttpResponse('Success', status=200)
 
 
 def get_solutions_request(request):
