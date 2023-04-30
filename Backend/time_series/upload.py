@@ -1,5 +1,6 @@
 from .models import *
 from django.db import transaction
+import decimal
 
 from .calculate import calculate_error
 
@@ -81,12 +82,10 @@ def create_ts_set(data, time_unit, set_type_obj, train_set=None):
   set_meta = data['setMeta']
   
   error = None
-  if (set_type_obj.set_type == SOLUTION):
+  if (set_type_obj.set_type == SOLUTION and train_set):
     series_data = data['seriesData']
-    # error = calculate_error(series_data, train_set.set_id)
-    # print(error)
-
-    error = 1 # Need to calculate error here
+    error = calculate_error(series_data, train_set.set_id)
+    print(error)
   
   ts_set = TS_Set.objects.create(
         set_name=set_meta['TS Set Name'],

@@ -30,7 +30,7 @@ class TS_Set(models.Model):
   max_length = models.IntegerField(null=True)
   num_ts = models.IntegerField(null=True)
   start_datetime = models.DateTimeField(null=True)
-  error = models.FloatField(null=True)
+  error = models.DecimalField(max_digits=20, decimal_places=10, null=True)
   tu_id = models.ForeignKey(TimeUnit, on_delete=models.DO_NOTHING, db_column='tu_id')
   set_type_id = models.ForeignKey(SetType, on_delete=models.DO_NOTHING, db_column='set_type_id')
 
@@ -47,7 +47,7 @@ class TimeSeries(models.Model):
   vector_size = models.IntegerField(null=True)
   length = models.IntegerField(null=True)
   sampling_period = models.IntegerField(null=True)
-  error= models.FloatField(null=True)
+  error = models.DecimalField(max_digits=20, decimal_places=10, null=True)
   set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='set_id')
   
   class Meta:
@@ -148,7 +148,7 @@ class TimeseriesSetDomain_Join(models.Model):
 
 # Link/Bridge test and training TS sets together
 class TestTrainingSolution_Join(models.Model):
-  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='training_set_id', related_name='training_set_id', primary_key=True)
+  training_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='training_set_id', related_name='training_set_id')
   other_set_id = models.ForeignKey(TS_Set, on_delete=models.DO_NOTHING, db_column='other_set_id', related_name='other_set_id')
 
   class Meta:
