@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `proj1_db`.`TS_Set` (
   `max_length` INT NULL,
   `num_ts` INT NULL,
   `start_datetime` DATETIME NULL,
-  `error` DECIMAL NULL,
+  `error` DECIMAL(10,3) NULL,
   `tu_id` INT NOT NULL,
   `set_type_id` INT NOT NULL,
   PRIMARY KEY (`set_id`),
