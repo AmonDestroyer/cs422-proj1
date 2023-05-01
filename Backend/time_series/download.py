@@ -36,9 +36,10 @@ def get_train_data():
     response_dict[f"set{count}"] = set_info
     count += 1
   
-  print(json.dumps(response_dict))
+  return_json = json.dumps(response_dict)
+  print(return_json)
   
-  return 1
+  return return_json
 
 def get_solutions(request_body):
   # data = json.loads(request_body)
@@ -80,6 +81,7 @@ def get_solutions(request_body):
     solutions_dict[f"solution{count}"] = solution_info
     count += 1
   
-  print(json.dumps(solutions_dict))
+  return_json = json.dumps(solutions_dict)
+  print(return_json)
 
-  return 1
+  return return_json
