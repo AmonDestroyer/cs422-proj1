@@ -82,7 +82,8 @@ WSGI_APPLICATION = 'TSProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DB_NAME'],
+        # 'NAME': os.environ['DB_NAME'],
+        'NAME': '422-Beta',
         'USER': os.environ['USER'],
         'PASSWORD': os.environ['PASSWORD'],
         'HOST': os.environ['HOST'],
