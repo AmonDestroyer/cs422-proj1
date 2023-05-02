@@ -28,6 +28,9 @@ def admin(request):
 def login(request):
   return redirect('roles:login')
 
+def solution(request):
+  return render(request, 'solution.html')
+
 
 ### Database POST request handlers ###
 

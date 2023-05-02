@@ -8,6 +8,7 @@ urlpatterns = [
   path('home/', views.home_page, name='index_html'),
   path('contributor/', views.contributor, name='contributor_html'),
   path('mle/', views.mle, name='mle_html'),
+  path('solution/', views.solution, name='solution_html'),
   path('admin/', views.admin, name='admin_html'),
   
   # POST urls (private)
