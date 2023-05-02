@@ -4,6 +4,77 @@ from django.db import transaction
 
 from .upload import TRAIN, SOLUTION
 
+def get_problem_data(problem_id=1):
+  ts_set = TS_Set.objects.get(set_id=1)
+  timeseries = TimeSeries.objects.get(set_id=ts_set)
+  ts_data = TS_Measurement.objects.filter(ts_id=timeseries)
+  
+  domain = Domain.objects.get(timeseriessetdomain_join__set_id=ts_set)
+  keywords = Keyword.objects.get(setkeyword_join__set_id=ts_set)
+  
+  response_dict = {}
+  TrainingSet = {}
+  SolutionMetadata = {}
+  
+  setMeta = {}
+  
+  setMeta.update({
+    "TS Set Name": ts_set.set_name,
+    "Description": ts_set.description,
+    "Aplication Domain(s)": domain.domain_name,
+    "Keywords": keywords.keyword,
+    "Vector Size": ts_set.vector_size,
+    "Min Length": ts_set.min_length,
+    "Max Length": ts_set.max_length,
+    "Number of TS in the Set": ts_set.num_ts,
+    "Start Datetime": str(ts_set.start_datetime),
+  })
+  
+  seriesMeta = {}
+  
+  seriesMeta.update({
+    "TS Name": timeseries.ts_name,
+    "Description": timeseries.description,
+    "Units": timeseries.y_unit,
+    "Scalar/Vector": timeseries.scalar_vector,
+    "Vector Size": timeseries.vector_size,
+    "Length": timeseries.length,
+    "Sampling Period": timeseries.sampling_period,
+  })
+  
+  seriesData = {}
+  
+  for count, data in enumerate(ts_data, start=1):
+    key = f"point{count}"
+    seriesData[key] = data.x_val
+  
+  TrainingSet.update({
+    "setMeta": setMeta,
+    "seriesMeta": seriesMeta,
+    "seriesData": seriesData
+  })
+  
+  other_set_ids = TestTrainingSolution_Join.objects.filter(training_set_id=problem_id).values_list('other_set_id', flat=True)
+  test_set = TS_Set.objects.get(set_id__in=other_set_ids, set_type_id__set_type='test')
+  
+  SolutionMetadata.update({
+    "Startdate": str(test_set.start_datetime),
+    "Units": timeseries.y_unit,
+    "Length": timeseries.length,
+    "Sampling Period": timeseries.sampling_period,
+  })
+  
+  response_dict.update({
+    "TrainingSet": TrainingSet,
+    "SolutionMetadata": SolutionMetadata,
+  })
+  
+  return_json = json.dumps(response_dict)
+  print(return_json)
+  
+  return 1
+
+
 def get_train_data():
   # Get all the train sets from the database
   
@@ -44,7 +115,7 @@ def get_train_data():
 def get_solutions(request_body):
   # data = json.loads(request_body)
   # set_id = request_body["set_id"]
-
+  
   set_id = '1' # Temporary for now, above code will be used later
   solutions_dict = {} # Contains all solutions
   count = 1

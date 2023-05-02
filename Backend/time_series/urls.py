@@ -16,7 +16,8 @@ urlpatterns = [
   
   # GET urls (private)
   path('_get-solution/', views.get_solutions_request),
-  path('_get-train-data/', views.train_data_download_request),
+  path('_get-train-data/', views.train_data_pull_request),
+  path('_download-train-data/', views.download_train_data),
   
   path('home/login/', views.login),
 ]

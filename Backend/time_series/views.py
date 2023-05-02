@@ -4,8 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .upload import upload_set, TRAIN, SOLUTION, TEST
-from .download import get_train_data, get_solutions
-from .calculate import calculate_error
+from .download import get_train_data, get_solutions, get_problem_data
 from .models import TS_Set
 
 import json
@@ -82,8 +81,13 @@ def upload_solution(request):
 
 
 ### Database GET request handlers ###
-def train_data_download_request(request):
+def train_data_pull_request(request):
   response = get_train_data()
+  return HttpResponse('Success', status=200)
+
+
+def download_train_data(request):
+  response = get_problem_data()
   return HttpResponse('Success', status=200)
 
 
