@@ -46,7 +46,7 @@ def upload_set(data, set_type, train_set=None):
             x_val = temp,
             ts_id=timeseries
           )
-          print(f"Added {temp}")
+          
           ts_measurements.append(ts_measurement)
           count += 1
         else:
