@@ -36,8 +36,6 @@ function prevPage(){
     showPage(pageNumer);
 }
 
-
-
 request.addEventListener("click", function(e){
     console.log("Request sent")
     showPage(0)

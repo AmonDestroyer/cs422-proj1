@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/solution.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="Home">
+        <a href="/home">
+            <img src="{% static 'icon/home.png' %}">
+        </a>
+    </div>
+    
+    <button id="refresh">Request Refresh</button>
+    <h1>Time Series Problems</h1>
+    <p>You will be able view problems and error mean calculations here.</p>
+
+
+    <div id="Solution-Box">
+        <div id="solution-table">
+            <div id="solu-table-info">
+                <thead>
+                    <tr>Contributor Name</tr>
+                    <tr>Solution #</tr>
+                    <tr>Set Name</tr>
+                    <tr>Error</tr>
+                    <tr>Paper Reference Links</tr>
+                </thead>
+            </div>
+        </div>
+    </div>
+
+    <div id="table">
+        <table id="problem-table">
+            <thead>
+                <tr>
+                    <th>Contributor Name    </th>
+                    <th> TS Set Name    </th>
+                    <th> Problem    </th>
+                    <th>Solution    </th>
+                    <th>Error   </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div>
+        <a href="/home">
+            <img src="{% static 'icon/back.png' %}">
+        </a> 
+    </div>
+    
+    <script src="{% static 'js/request.js' %}"></script>
+
+
+</body>
+</html>
