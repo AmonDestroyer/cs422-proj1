@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .upload import upload_set, TRAIN, SOLUTION, TEST
 from .download import get_train_data, get_solutions, get_problem_data
@@ -96,5 +96,5 @@ def download_train_data(request):
 
 def get_solutions_request(request):
   # request.body should be a json object containing set_id
-  response = get_solutions(request.body)
-  return HttpResponse('Success', status=200)
+  response = get_solutions()
+  return JsonResponse(response, status=200, safe=False) # safe=False allows for non-dict objects to be serialized
