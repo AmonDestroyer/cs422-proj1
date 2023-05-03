@@ -41,12 +41,12 @@ def upload_set(data, set_type, train_set=None):
       ts_measurements = []
       
       for _, temp in series_data.items():
-        if (count < length):
+        if (count <= length):
           ts_measurement = TS_Measurement(
-            x_val =temp,
+            x_val = temp,
             ts_id=timeseries
           )
-          print(f"Added {count}")
+          print(f"Added {temp}")
           ts_measurements.append(ts_measurement)
           count += 1
         else:
