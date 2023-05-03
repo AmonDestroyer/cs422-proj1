@@ -36,11 +36,24 @@ def upload_set(data, set_type, train_set=None):
       # loop through all the data in series_data and create a TS_Measurement object for each point
       # each TS_Measurement object will then be created as a row in the Table TS_Measurement in the Database
       # each TS_Measurement object ts_id links it to the timeseries that was created above
+      count = 0
+      length = int(ts_set.vector_size)
+      ts_measurements = []
+      
       for _, temp in series_data.items():
-        TS_Measurement.objects.create(
-          x_val=temp,
-          ts_id=timeseries # links the TS_Measurement object to the TimeSeries object (row in table) that was created above
-        )
+        if (count < length):
+          ts_measurement = TS_Measurement(
+            x_val =temp,
+            ts_id=timeseries
+          )
+          print(f"Added {count}")
+          ts_measurements.append(ts_measurement)
+          count += 1
+        else:
+          break
+      
+      # Bulk add all the objects just created.
+      TS_Measurement.objects.bulk_create(ts_measurements)
       
       # Additional meta data for TS_Set that will be joined
       set_domain = Domain.objects.create(domain_name=set_meta['Application Domain(s)'])
