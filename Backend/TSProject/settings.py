@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import warnings
+
+# Time zones don't matter when uploading to database
+# Error message sent due to this (datetime not containing the time zone)
+# So ignore this warning
+warnings.filterwarnings("ignore", message="DateTimeField .* received a naive datetime")
 
 load_dotenv() # Load environment variables from .env file
 
@@ -83,6 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ['DB_NAME'],
+        # 'NAME': '422-Beta',
         'USER': os.environ['USER'],
         'PASSWORD': os.environ['PASSWORD'],
         'HOST': os.environ['HOST'],
