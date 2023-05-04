@@ -38,8 +38,24 @@ function insertHeader(solutionTable){
 }
 
 function downloadSet(setId){
-    window.location.href = `/_download-train-data/${setId}`;
+    fetch(`/_download-train-data?set_id=${setId}`)
+        .then(function(response){
+            if(response.ok){
+                return response.text();
+            }
+            else{
+                throw new Error("Failed to retrieve data!");
+            }
+        })
+        .then(function(data){
+            console.log(data);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 }
+
+
 
 refresh.addEventListener("click", function(e){
     problemTable.innerHTML = "";
@@ -59,7 +75,6 @@ refresh.addEventListener("click", function(e){
                 let newProblem = problemTable.insertRow();
                 let problemName = key;
 
-
                 //Populate Table
                 generateTable(newProblem, problemName);
                 
@@ -74,8 +89,7 @@ refresh.addEventListener("click", function(e){
                 download.innerHTML = "Download";
                 generateButton(newProblem, download);
                 download.addEventListener("click", function(e){
-                    downloadSet(data[key]["set_id"]);
-                    console.log(data[key]["set_id"]);
+                    console.log(key);
                 })
                 
                 let {lightbox, lightBoxContent} = generateLightBox();
@@ -83,8 +97,6 @@ refresh.addEventListener("click", function(e){
                 solutionButton.addEventListener("click", function(e){
                     lightbox.style.display = "block";
                 })
-
-                
 
                 //Solution Table 
                 const solutionTable = document.createElement("table");
