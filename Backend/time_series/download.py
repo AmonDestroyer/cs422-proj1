@@ -69,6 +69,7 @@ def get_problem_data(problem_id=1):
     "SolutionMetadata": SolutionMetadata,
   })
   
+  # print(json.dumps(response_dict))
   return response_dict
 
 
@@ -91,7 +92,7 @@ def get_train_data():
     
     set_info.update({
       "paper reference": paper.paper_reference,
-      "paper link": (paper.paper_link).replace('\r', '')
+      "paper link": (paper.paper_link)
     })
     
     contributor = Contributor.objects.get(setcontributor_join__set_id=ts_set)
@@ -103,6 +104,8 @@ def get_train_data():
     
     response_dict[f"set{count}"] = set_info
     count += 1
+    
+  # print(json.dumps(response_dict))
   
   return response_dict
 
@@ -151,7 +154,7 @@ def get_solutions():
       solutions_dict[f"solution{solution_count}"] = solution_info
       solution_count += 1
     
-    problem_solutions_dict[f"problem{problem_count}"] = solutions_dict
+    problem_solutions_dict[f"{problem_set.set_id}"] = solutions_dict
     problem_count += 1
 
   return problem_solutions_dict 
