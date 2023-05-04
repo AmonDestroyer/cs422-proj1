@@ -5,7 +5,7 @@ from django.db import transaction
 from .upload import TRAIN, SOLUTION
 
 def get_problem_data(problem_id=1):
-  ts_set = TS_Set.objects.get(set_id=1)
+  ts_set = TS_Set.objects.get(set_id=problem_id)
   timeseries = TimeSeries.objects.get(set_id=ts_set)
   ts_data = TS_Measurement.objects.filter(ts_id=timeseries)
   
