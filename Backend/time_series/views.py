@@ -73,6 +73,10 @@ def upload_data(request):
         return HttpResponse(response[1], status=400)
       else:
         return HttpResponse('Success', status=200)
+    
+    else:
+      print("Not a valid request")
+      return HttpResponse('Invalid', status=400)
 
   else: # GET request (or any other) - redirect to home page since this is not a valid request
     return redirect('../home/')
@@ -86,12 +90,12 @@ def upload_solution(request):
 ### Database GET request handlers ###
 def train_data_pull_request(request):
   response = get_train_data()
-  return HttpResponse('Success', status=200)
+  return JsonResponse(response, status=200, safe=False)
 
 
 def download_train_data(request):
   response = get_problem_data()
-  return HttpResponse('Success', status=200)
+  return JsonResponse(response, status=200, safe=False)
 
 
 def get_solutions_request(request):
