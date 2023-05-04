@@ -53,3 +53,14 @@ problem-table {
   img:hover {
     transform: scale(1.2);
   }
+  #problem-table, #solution-table {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+  
+  #problem-table td, #problem-table th,
+  #solution-table td, #solution-table th {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
