@@ -1,3 +1,5 @@
+import csvDownload from 'json-to-csv-export';
+
 const refresh = document.getElementById("refresh"); 
 const problemTable = document.getElementById("problem-table");
 // const solutionTable = document.getElementById("solution-table");
@@ -48,13 +50,12 @@ function downloadSet(setId){
             }
         })
         .then(function(data){
-            console.log(data);
+            csvDownload(data);
         })
         .catch(function(error) {
             console.log(error);
         });
 }
-
 
 
 refresh.addEventListener("click", function(e){
@@ -89,6 +90,7 @@ refresh.addEventListener("click", function(e){
                 download.innerHTML = "Download";
                 generateButton(newProblem, download);
                 download.addEventListener("click", function(e){
+                    downloadSet(key);
                     console.log(key);
                 })
                 
