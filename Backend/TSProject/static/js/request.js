@@ -142,7 +142,7 @@ refresh.addEventListener("click", function(e){
                 solutionTable.id = "solution-table";
                 insertHeader(solutionTable);
     
-                //Access contributor name and set name
+                //Access Table header
                 for(let solution in data[key]){    
                     const newSolution = solutionTable.insertRow();    
                     let setName = data[key][solution]["set name"];
