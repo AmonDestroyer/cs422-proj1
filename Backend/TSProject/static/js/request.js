@@ -37,6 +37,10 @@ function insertHeader(solutionTable){
     }
 }
 
+function downloadSet(setId){
+    window.location.href = `/_download-train-data/${setId}`;
+}
+
 refresh.addEventListener("click", function(e){
     problemTable.innerHTML = "";
     fetch("/_get-solution")
@@ -58,18 +62,29 @@ refresh.addEventListener("click", function(e){
 
                 //Populate Table
                 generateTable(newProblem, problemName);
+                
 
                 // view solution button
                 let solutionButton = document.createElement("button"); 
                 solutionButton.innerHTML = "View Solution";
                 generateButton(newProblem, solutionButton);
 
+                //Download Button 
+                let download = document.createElement("button"); 
+                download.innerHTML = "Download";
+                generateButton(newProblem, download);
+                download.addEventListener("click", function(e){
+                    downloadSet(data[key]["set_id"]);
+                    console.log(data[key]["set_id"]);
+                })
+                
                 let {lightbox, lightBoxContent} = generateLightBox();
     
                 solutionButton.addEventListener("click", function(e){
                     lightbox.style.display = "block";
                 })
 
+                
 
                 //Solution Table 
                 const solutionTable = document.createElement("table");
