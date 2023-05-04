@@ -1,81 +1,82 @@
+const refresh = document.getElementById("refresh"); 
+const problemTable = document.getElementById("problem-table");
 
-// add an event listener to the refresh button
-const refreshButton = document.getElementById('refresh');
-const solutionBox = document.getElementById("Solution-Box");
-refreshButton.addEventListener('click', () => {
-    fetch('/_get-solution/')
-        .then(response => {
-            if (response.ok) {
+function generateTable(row, name){
+    const nameCell = row.insertCell();
+    const textName = document.createTextNode(name);
+    nameCell.appendChild(textName)
+}
+
+function generateButton(row, button){
+    const cell = row.insertCell();
+    cell.appendChild(button);
+}
+
+function generateLightBox(){
+    const lightbox = document.createElement("div");
+    lightbox.id = "lightbox"; 
+
+    const lightBoxContent = document.createElement("div"); 
+    lightBoxContent.id = "boxContent"; 
+
+    const exit = document.createElement("button"); 
+    exit.innerHTML = "Exit";
+    exit.id = "exit"; 
+
+    lightBoxContent.appendChild(exit);
+    lightbox.appendChild(lightBoxContent);
+    document.body.appendChild(lightbox); 
+ 
+    return {lightbox, exit};
+}
+
+
+refresh.addEventListener("click", function(e){
+    fetch("/_get-solution")
+        .then(function(response){
+            if(response.ok){
                 return response.json();
-            } else {
-                throw new Error('Network response was not ok.');
+            }
+            else{
+                throw new Error("Failed to retrieve data!");
             }
         })
-        .then(data =>
-             {
+        .then(function(data){
             console.log(data);
-            // do something with the retrieved data here
-            const problem_table = document.getElementById('problem-table');
-            for(const key in data){
-                for(const solution in data[key]){
-                    // Problem Set Information
-                    const setName = data[key][solution]["set name"];
-                    console.log(data[key][solution]["paper link"]);
+            let setName;
+            let contributorName;
+            for(let key in data){
+                //New problem Row
+                let newProblem = problemTable.insertRow();
+                let problemName = key;
 
-            //         console.log(setName);
-            //         const contributorFName = data[key][solution]["contributor first name"];
-            //         const problemName = key;
-            //         const errorCalc = data[key][solution]["error"];
-                    
-            //         // Insert a new problem row 
-            //         const newProblem = problem_table.insertRow();
+                //Populate Table
+                generateTable(newProblem, contributorName);
+                generateTable(newProblem, setName);
+                generateTable(newProblem, problemName);
 
-            //         // Insert cells for row information
-            //         const SetNameCell = newProblem.insertCell();
-            //         const ContriNameFCell = newProblem.insertCell();
-            //         const problemCell = newProblem.insertCell();
-            //         const solutionViewCell = newProblem.insertCell();
-            //         const errorCell = newProblem.insertCell();
+                // view solution button
+                let solutionButton = document.createElement("button"); 
+                solutionButton.innerHTML = "View Solution";
+                generateButton(newProblem, solutionButton);
 
-            //         // Create Text Node to add to cell
-            //         const ContriNameFText = document.createTextNode(contributorFName);
-            //         const setNameText = document.createTextNode(setName);
-            //         const problemNameText = document.createTextNode(problemName);
-            //         const errorText = document.createTextNode(errorCalc);
+                let {lightbox, exit} = generateLightBox();
+                console.log(exit);
+                solutionButton.addEventListener("click", function(e){
+                    console.log("View Solution Button was clicked");
+                    lightbox.style.display = "block";
+                })
 
-            //         //Create solution button
-            //         const solutionButton = document.createElement("button");
-            //         solutionButton.innerHTML = "View Solution";
-            //         // Add text to cell
-            //         SetNameCell.appendChild(setNameText);
-            //         ContriNameFCell.appendChild(ContriNameFText);
-            //         problemCell.appendChild(problemNameText);
-            //         solutionViewCell.appendChild(solutionButton);
-            //         errorCell.appendChild(errorText);
-
-            //         // Create Solution Div 
-            //         const solutionDiv = document.createElement("div");
-            //         solutionDiv.id = "solutionDiv";
-            //         solutionBox.appendChild(solutionDiv);
-
-            //         // Create exit solution div button 
-            //         const exitButton = document.createElement("button"); 
-            //         exitButton.innerText = "Exit";
-            //         exitButton.id = "exit"
-            //         solutionDiv.appendChild(exitButton);
-
-            //         solutionButton.addEventListener("click", function(e){
-            //             console.log("solution button was clicked"); 
-            //             solutionDiv.style.display = "block";
-            //         });
-            //         exitButton.addEventListener("click", function(e){
-            //             console.log("Exit button was clicked"); 
-            //             solutionDiv.style.display = "none";
-            //         })
+                exit.addEventListener("click", function(e){
+                    lightbox.style.display = "none";
+                })
+                
+                //Access contributor name and set name
+                for(let solution in data[key]){
+                    setName = data[key][solution]["set name"];
+                    contributorName = data[key][solution]["contributor first name"]
                 }
-             }
+            }
         })
-        .catch(error => {
-            console.error(error);
-        });
-});
+})
+
