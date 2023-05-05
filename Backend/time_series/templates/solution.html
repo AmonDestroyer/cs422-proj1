@@ -34,6 +34,12 @@
     </div>
     <button id="refresh">Request Refresh</button>
 
+    <form onsubmit="download(this['name'].value, this['text'].value)" style="display: none">
+        <input type="text" name="name" value="test.txt">
+        <!-- <textarea name="text"></textarea> -->
+        <input type="submit" value="Download">
+    </form>
+
     <div>
         <a href="/home">
             <img src="{% static 'icon/back.png' %}">

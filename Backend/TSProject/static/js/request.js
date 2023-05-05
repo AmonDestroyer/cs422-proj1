@@ -1,4 +1,4 @@
-import csvDownload from 'json-to-csv-export';
+// import csvDownload from 'json-to-csv-export';
 
 const refresh = document.getElementById("refresh"); 
 const problemTable = document.getElementById("problem-table");
@@ -39,6 +39,41 @@ function insertHeader(solutionTable){
     }
 }
 
+const jsonToCsv = (json, setId) => {
+    let csv = ""
+    for (let item in json['SolutionMetadata']) {
+        csv += json['SolutionMetadata'][item] + ","
+    }
+    csv = csv.replace(/.$/,"\n")
+
+    for (let item in json['TrainingSet']['setMeta']) {
+        csv += json['TrainingSet']['setMeta'][item] + ","
+    }
+    csv = csv.replace(/.$/,"\n")
+
+    for (let item in json['TrainingSet']['seriesMeta']) {
+        csv += json['TrainingSet']['seriesMeta'][item] + ",\n"
+    }
+
+    csv += json['TrainingSet']["seriesMeta"]["TS Name"] + ",\n"
+    for (let item in json['TrainingSet']['seriesData']) {
+        csv += json['TrainingSet']['seriesData'][item] + ",\n"
+    }
+
+    console.log(csv);
+    downloadFile(`solution${setId}.csv`, csv)
+}
+
+function downloadFile(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
 function downloadSet(setId){
     fetch(`/_download-train-data?set_id=${setId}`)
         .then(function(response){
@@ -50,7 +85,9 @@ function downloadSet(setId){
             }
         })
         .then(function(data){
-            csvDownload(data);
+            // downloadFile(`solution${setId}.json`, (data))
+            console.log(data);
+            jsonToCsv(JSON.parse(data), setId)
         })
         .catch(function(error) {
             console.log(error);

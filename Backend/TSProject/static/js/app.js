@@ -4,104 +4,6 @@ document.addEventListener("click", (event) => {
     }
 })
 
-const jsonToCsv = (json) => {
-    let csv = ""
-    for (const [key, value] of Object.entries(json['setMeta'])) {
-        csv += value + ","
-    }
-    csv = csv.replace(/.$/,"\n")
-    for (const [key, value] of Object.entries(json['seriesMeta'])) {
-        csv += value + ",\n"
-    }
-    csv += json["seriesMeta"]["TS Name"] + ",\n"
-    for (const [key, value] of Object.entries(json['seriesData'])) {
-        csv += value + ",\n"
-    }
-
-    console.log(csv);
-    download("test.csv", csv)
-}
-
-
-function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
-  }
-
-
-
-
-function xlsxToJson(file) {
-
-    // return new Promise((resolve, reject) => {
-    //     const reader = new FileReader();
-    //     reader.readAsText(file);
-    //     reader.onload = () => resolve(
-    //         process(reader.result)
-    //     );
-    // })
-
-    // function process(result) {
-    //     let data = result;
-    //     let workbook = XLSX.read(data, {type: 'binary'});
-        
-    //     workbook.SheetNames.forEach(function(sheetName) {
-    //         let XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header: 1});
-
-    //         const setMeta = {
-    //             "TS Set Name": XL_row_object[0][0],
-    //             "Description": XL_row_object[0][1],
-    //             "Application Domain(s)": XL_row_object[0][2],
-    //             "Keywords": XL_row_object[0][3],
-    //             "Vector Size": XL_row_object[0][4],
-    //             "Min Length": XL_row_object[0][5],
-    //             "Max Length": XL_row_object[0][6],
-    //             "Number of TS in the Set": XL_row_object[0][7],
-    //             "Start Datetime": XL_row_object[0][8],
-    //             "Contributors": XL_row_object[0][9],
-    //             "Related Paper Reference(s)": XL_row_object[0][10],
-    //             "Related Paper Link": XL_row_object[0][11]
-    //         }
-
-    //         const seriesMeta = {
-    //             "TS Name": XL_row_object[10][0],
-    //             "Description": XL_row_object[2][0],
-    //             "Domain(s)": XL_row_object[3][0],
-    //             "Units": XL_row_object[4][0],
-    //             "Keywords": XL_row_object[5][0],
-    //             "Scalar/Vector": XL_row_object[6][0],
-    //             "Vector Size": XL_row_object[7][0],
-    //             "Length": XL_row_object[8][0],
-    //             "Sampling Period": XL_row_object[9][0]
-    //         }
-
-    //         let seriesData = {}
-    //         for (let i = 11; i < XL_row_object.length; i++) {
-    //             seriesData["point" + String(i-11)] = XL_row_object[i][0]
-    //         }
-            
-
-    //         const fullJson = {
-    //             "setMeta": setMeta,
-    //             "seriesMeta": seriesMeta,
-    //             "seriesData": seriesData
-    //         }
-    //         console.log(fullJson);
-
-    //         return fullJson
-    //     })
-    // }
-}
-
-
 function csvToJson(file) {
 
     return new Promise((resolve, reject) => {
@@ -218,15 +120,6 @@ async function handleFiles(trainFile, testFile){
             trainJson = await csvToJson(trainFile.files[0])
             break;
 
-        // case "xlsx":
-        //     convXlsx(trainFile.files[0])
-        //     break;
-
-        // case "xls":
-        //     convXlsx(trainFile.files[0])
-        //     break;
-
-
         default:
             alert("Invalid file type")
             break;
@@ -242,15 +135,6 @@ async function handleFiles(trainFile, testFile){
         case "csv":
             testJson = await csvToJson(testFile.files[0])
             break;
-
-        // case "xlsx":
-        //     convXlsx(trainFile.files[0])
-        //     break;
-
-        // case "xls":
-        //     convXlsx(trainFile.files[0])
-        //     break;
-
 
         default:
             alert("Invalid file type")
