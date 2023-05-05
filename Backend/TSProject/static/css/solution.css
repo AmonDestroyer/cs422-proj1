@@ -1,3 +1,6 @@
+body{
+  background-color: rgb(241, 241, 241);
+}
 problem-table {
   table-layout: fixed;
   width: 100%;
@@ -20,7 +23,7 @@ problem-table {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 950%;
   max-width: 600px;
   padding: 20px;
   background-color: #fff;
@@ -54,13 +57,68 @@ problem-table {
     transform: scale(1.2);
   }
   #problem-table, #solution-table {
+    margin:auto;
     border-collapse: collapse;
     border: 1px solid black;
   }
   
   #problem-table td, #problem-table th,
   #solution-table td, #solution-table th {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
     border: 1px solid black;
     padding: 5px;
   }
   
+  #refresh-container{
+    display: flex;
+    justify-content: center;
+
+  }
+ #exit, #download, #solutionButton, #refresh{
+  flex-wrap: wrap;
+  display:flex;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(231, 231, 231);
+  color: rgb(53, 52, 52); /* set the font color */
+  border: none; /* remove the border */
+  border-radius: 5px; /* round the corners */
+  padding: 10px 20px; /*add padding to make the button more clickable*/
+  font-size: 16px; /* set the font size */
+  cursor: pointer; /* add a pointer cursor on hover */
+  margin: 10px;
+  justify-content: center;
+ }
+
+ #download:hover, #solutionButton:hover, #refresh:hover, #exit:hover{
+  background-color: #d1d0d0; /* change the background color on hover */
+}
+
+#problem-table th {
+  /* styles for all header cells in the table */
+  font-family: 'Montserrat', sans-serif;
+}
+
+#container{
+  font-family: 'Montserrat', sans-serif, light;
+  text-align: center;
+}
+
+ 
+input[type="file"] {
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  font-size: 20px;
+  color: #555;
+  text-align: center;
+}
+
+input[type="file"]:focus {
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+}

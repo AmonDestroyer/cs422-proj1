@@ -11,28 +11,20 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <a href="login.html">
+            <img src="../icon/back.png">
+        </a> 
+    </div>
     <div id="container">
         <h1>Time Series Problem Page</h1>
         <p>You will be able view problems and error mean calculations here.</p>
-        <div>
-            <a href="login.html">
-                <img src="../icon/back.png">
-            </a> 
-        </div>
     </div>
-    
-    <div id="table">
-        <table id="problem-table">
-            <thead>
-                <tr>
-                    <th>Problem</th>
-                    <th>Solution</th>
-                    <th>Downloads</th>
-                </tr>
-            </thead>
-        </table>
+
+    <div id = "problem-container"></div>
+    <div id="refresh-container">
+        <button id="refresh">Request Refresh</button>
     </div>
-    <button id="refresh">Request Refresh</button>
 
     <form onsubmit="download(this['name'].value, this['text'].value)" style="display: none">
         <input type="text" name="name" value="test.txt">

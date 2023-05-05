@@ -109,6 +109,32 @@ body {
     text-decoration: none;
   }
   
+  #upload-success {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  
+  #upload-success div {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+  }
+
+  #upload-success div p{
+    font-family: 'Montserrat', sans-serif;
+    padding: 0px 30px 20px 30px;
+  }
+  
   @media only screen and (max-width: 900px) and (max-height: 800px){
     input[type="file"] {
       width: 80%;

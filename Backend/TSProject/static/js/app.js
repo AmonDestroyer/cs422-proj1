@@ -155,6 +155,8 @@ async function handleFiles(trainFile, testFile){
 }
 
 
+
+
 const sendFile = (json) => {
     fetch('/_upload-data/', {
         method: 'POST',
@@ -163,14 +165,7 @@ const sendFile = (json) => {
     .then(response => {
         console.log(response)
         if (response.status === 200) {
-            let success = document.createElement("div");
-            success.id="success"
-            let img = document.createElement("img");
-            img.src="../icon/back.png"
-            success.appendChild(img);
-            document.getElementById('success').style.display = 'block';
-            document.body.appendChild(success);
-            // document.querySelector('#upSuccess').style.display = "inline";
+            document.querySelector('#upSuccess').style.display = "inline";
         } else {
             document.querySelector('#upError').style.display = "inline";
         }

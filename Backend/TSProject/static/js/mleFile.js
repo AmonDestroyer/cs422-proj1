@@ -147,10 +147,6 @@ const sendFile = (json) => {
     .then(response => {
         console.log(response)
         if (response.status === 200) {
-            let success = document.createElement("div");
-            let img = document.createElement("img");
-            img.src="../icon/back.png"
-            success.appendChild(img);
             document.querySelector('#upSuccess').style.display = "inline";
         } else {
             const fileInput = document.getElementById("solutionFile");

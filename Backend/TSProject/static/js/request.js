@@ -28,10 +28,9 @@ function generateLightBox(){
     return {lightbox, lightBoxContent};
 }
 
-function insertHeader(solutionTable){
-    const newHeader = solutionTable.insertRow()
-    const header = ["Solution #", "Set Name", "Contributor First Name", 
-            "Contributor Last Name", "Paper References", "Paper Link", "Error"];
+function insertHeader(table, header){
+    const newHeader = table.insertRow()
+    
     for(let i = 0; i < header.length; i++){
         let cell = newHeader.insertCell(); 
         const name = document.createTextNode(header[i]);
@@ -96,7 +95,8 @@ function downloadSet(setId){
 
 
 refresh.addEventListener("click", function(e){
-    problemTable.innerHTML = "";
+    const problemTable = document.createElement("table"); 
+    document.getElementById("problem-container").appendChild(problemTable);
     fetch("/_get-solution")
         .then(function(response){
             if(response.ok){
@@ -108,10 +108,13 @@ refresh.addEventListener("click", function(e){
         })
         .then(function(data){
             console.log(data);
+            problemTable.id = "problem-table";
+            const problemHeader = ["Problem Set Number", "Solution", "Download"]; 
+            insertHeader(problemTable, problemHeader);
             for(let key in data){
                 //New problem Row
                 let newProblem = problemTable.insertRow();
-                let problemName = key;
+                let problemName = `Set ID: ${key}`;
 
                 //Populate Table
                 generateTable(newProblem, problemName);
@@ -120,11 +123,13 @@ refresh.addEventListener("click", function(e){
                 // view solution button
                 let solutionButton = document.createElement("button"); 
                 solutionButton.innerHTML = "View Solution";
+                solutionButton.id = "solutionButton";
                 generateButton(newProblem, solutionButton);
 
                 //Download Button 
                 let download = document.createElement("button"); 
                 download.innerHTML = "Download";
+                download.id = "download";
                 generateButton(newProblem, download);
                 download.addEventListener("click", function(e){
                     downloadSet(key);
@@ -140,7 +145,9 @@ refresh.addEventListener("click", function(e){
                 //Solution Table 
                 const solutionTable = document.createElement("table");
                 solutionTable.id = "solution-table";
-                insertHeader(solutionTable);
+                const header = ["Solution #", "Set Name", "Contributor First Name", 
+            "Contributor Last Name", "Paper References", "Paper Link", "Error"];
+                insertHeader(solutionTable, header);
     
                 //Access Table header
                 for(let solution in data[key]){    
