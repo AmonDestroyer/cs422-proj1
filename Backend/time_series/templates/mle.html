@@ -58,7 +58,11 @@
                     your solution by uploading a txt, csv, JSON, exel, or xlsx file. You will be able to see how 
                     your solution compares.
                 </p>
-                <input type="file" name="file" id="myFile" accept=".csv, .txt, .xlsx" onchange="return fileValidation()"/> 
+                <label for="solutionFile">SolutionFile:</label>
+                <input type="file" id="solutionFile" accept=".csv, .xlsx, .json, .xls"/>
+                <p id="upSuccess" style="display: none; color: green">Success: file was uploaded </p>
+                <p id="upError" style="display: none; color: red">Error: file was not uploaded, check console for details</p>
+                
                 <button type="button" id="upload">Upload</button>
                 <div>
                     <button class="previous">Back</button>
@@ -75,6 +79,8 @@
         </div>
     </div>
     <script src="{% static 'js/lightbox.js' %}"></script>
+    <script src="{% static 'js/mleFile.js' %}"></script>
+
 
 </body>
 </html>
