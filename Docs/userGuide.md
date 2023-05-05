@@ -1,6 +1,9 @@
 # User Navigation Guide
 This document is designed to provide you with all the information you need to navigate and use the features of the website. From the homepage to the various sections and pages, you will learn how to find what you're looking for, how to interact with different elements on the page, and how to customize your experience. The page will include step-by-step instructions, visual aids, and helpful tips to make your browsing experience smooth and efficient.
-## Login Option / Role Descriptions
+## Login Option
+
+### Role Options
+There are two main roles for this web application. Clicking "Contributor" will bring you to the Contributors Panel. And the "MLE/DS" will bring you to the MLE/DE Panel.
 
 ### Contributor Login
 The contributors' page is designed to allow users to submit problem data into the database for further analysis. This page provides users with a form to upload their test and training files. Upon successful upload, a message will be displayed, and the files will be added to the database. If the upload fails, an alert message will be displayed, and the user will be asked to try again.
@@ -49,13 +52,13 @@ TEMPERATURE,,,,,,,,,
 ### MLE/DS Login
 The MLE (Machine Learning Engineer) role is responsible for analyzing problem data and developing solutions to improve the performance of machine learning models. This role requires users to upload solution data into the database, which includes the set ID of the problem. This page provides users with a form to upload their solution data. Upon successful upload, a message will be displayed, and the solution data will be added to the database. If the upload fails, an alert message will be displayed, and the user will be asked to try again.
 
-> Step 1: Navigate to the MLE role page on the website.
+Step 1: Navigate to the MLE role page on the website.
 
 Step 2: Click on the 'Upload Solution' button.
 
-> Step 3: Select the solution file you want to upload by clicking on the 'Choose File' button. A file explorer window will appear, allowing you to browse through your local storage to locate the file. -->
+Step 3: Select the solution file you want to upload by clicking on the 'Choose File' button. A file explorer window will appear, allowing you to browse through your local storage to locate the file. -->
 
-Step 4: Make sure to include the set ID of the problem in the solution document. The set ID is a unique identifier for the problem, and it is necessary to associate the solution with the correct problem in the database.
+> Step 4: Make sure to include the set ID of the problem in the solution document. The set ID is a unique identifier for the problem, and it is necessary to associate the solution with the correct problem in the database.
 
 Step 5: Once you have selected the file and included the set ID, click on the 'Upload' button to initiate the upload process.
 
