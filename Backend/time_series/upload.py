@@ -10,6 +10,21 @@ SOLUTION = 'solution'
 TEST = 'test'
  
 def upload_set(data, set_type, train_set=None):
+  """Uploads a train set, test set, or solution set to the database based on the set_type passed in
+
+  Args:
+      data (dict): Dict containing the data to be uploaded to the database
+                   Composed of setMeta, seriesMeta, and seriesData dicts
+      set_type (string): A string, train, solution, or test, that indicates what type of set is being uploaded
+      train_set (TS_Set object, optional): A set_type=train TS_Set. Defaults to None.
+
+  Returns:
+      (tuple): A tuple containing:
+                on Success: (1, ts_set), where ts_set is the TS_Set object that was uploaded 
+                on Failure: (0, error), where error is the error that was thrown
+  """
+  
+  
   set_meta = data['setMeta'] # setMeta contains all the set's metadata - set_meta is the dictionary for that metadata
   ts_meta = data['seriesMeta'] # tsMeta contains the time series's metadata - ts_meta is the dictionary for that metadata
   series_data = data['seriesData'] # seriesData contains the time series's data - series_data is the dictionary for that data 
@@ -36,9 +51,9 @@ def upload_set(data, set_type, train_set=None):
       # loop through all the data in series_data and create a TS_Measurement object for each point
       # each TS_Measurement object will then be created as a row in the Table TS_Measurement in the Database
       # each TS_Measurement object ts_id links it to the timeseries that was created above
-      count = 0
-      length = int(ts_set.vector_size)
-      ts_measurements = []
+      count = 0 # Count used to prevent more than the vector size from being uploaded (in case of empty spaces in csv)
+      length = int(ts_set.vector_size) # Length of ts_set data
+      ts_measurements = [] # List of TS_Measurement objects that will be bulk created
       
       for _, temp in series_data.items():
         if (count <= length):
@@ -58,7 +73,7 @@ def upload_set(data, set_type, train_set=None):
       # Additional meta data for TS_Set that will be joined
       set_domain = Domain.objects.create(domain_name=set_meta['Application Domain(s)'])
       set_keyword = Keyword.objects.create(keyword=set_meta['Keywords'])
-      contributor = Contributor.objects.create(contrib_fname=set_meta['Contributors']) # Needs to be fixed later (need to split first and last name)
+      contributor = Contributor.objects.create(contrib_fname=set_meta['Contributors'])
       paper = Paper.objects.create(paper_reference=set_meta['Related Paper Reference(s)'], paper_link=set_meta['Related Paper Link'])
       
       # Additional meta data for TimeSeries that will be joined
@@ -90,15 +105,18 @@ def upload_set(data, set_type, train_set=None):
     return 0, e
   
   
- 
+########################
+### Helper Functions ###
+########################
 def create_ts_set(data, time_unit, set_type_obj, train_set=None):
+  # Creates the TS_Set object using the TS_Set object and data from set_meta
+  # If it's a solution set, and a train set was passed in (this should always be the case), calculate error
   set_meta = data['setMeta']
   
   error = None
   if (set_type_obj.set_type == SOLUTION and train_set):
     series_data = data['seriesData']
     error = calculate_error(series_data, train_set.set_id)
-    print(error)
   
   ts_set = TS_Set.objects.create(
         set_name=set_meta['TS Set Name'],
@@ -115,8 +133,10 @@ def create_ts_set(data, time_unit, set_type_obj, train_set=None):
   
   return ts_set
 
-# Incomplete? May need to add a loop to create multiple TimeSeries objects
+
 def create_time_series(ts_meta, ts_set):
+  # Creates the TimeSeries object using the TS_Set object and data from ts_meta
+  
   timeseries = TimeSeries.objects.create(
         ts_name=ts_meta['TS Name'],
         description=ts_meta['Description'],

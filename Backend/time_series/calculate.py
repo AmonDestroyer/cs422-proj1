@@ -4,6 +4,9 @@ from sklearn.metrics import mean_squared_error
 from .models import *
 
 def calculate_error(solution_data, train_set_id):
+  # Calculate mean squared error between solution_data and test_set
+  # Return back mean squared error
+  
   # Get all the ids of sets linked to the train_set_id
   # other_set_ids will contain a <QuerySet> object containing the other_set_ids
   # these ids are only the ids of the sets that are linked with train_set_id
@@ -26,10 +29,9 @@ def calculate_error(solution_data, train_set_id):
   
   if len(pred_data) == len(true_data):
     error = mean_squared_error(true_data, pred_data)
-    print(error)
     
-    return mean_squared_error(true_data, pred_data)
+    return error
   
   else:
-    return -1
+    return -1 # Error occured, return -1 to indicate this solution doesn't work. 
   

@@ -1,13 +1,12 @@
 from django.db import models
 
-# Create your models here.
 # All models (classes) follow the sql schema created from our sql file
-# All models will be used to create a python object which will then be passed into the database as a row to
-# their respective tables
+# All models are used to create a python object which will then be passed into the database as a row to
+# their respective tables using Django's ORM (Object Relational Mapper)
 
 class TimeUnit(models.Model):
   tu_id = models.AutoField(primary_key=True) # Creates an auto-incrementing primary key (starts at 1)
-  unit_name = models.CharField(max_length=1000, null=True) # 
+  unit_name = models.CharField(max_length=1000, null=True) # null set to True indicating this field doesn't have to be filled in
   
   class Meta:
     db_table = 'Time Unit' # Used to specify the name of the table in the database
