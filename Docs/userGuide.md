@@ -3,7 +3,7 @@ This document is designed to provide you with all the information you need to na
 ## Role Descriptions
 
 
-##### Contributor 
+### Contributor 
 The contributors' page is designed to allow users to submit problem data into the database for further analysis. This page provides users with a form to upload their test and training files. Upon successful upload, a message will be displayed, and the files will be added to the database. If the upload fails, an alert message will be displayed, and the user will be asked to try again.
 
 To submit test and training files, follow the steps below:
