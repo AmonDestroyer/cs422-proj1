@@ -52,11 +52,11 @@ def upload_set(data, set_type, train_set=None):
       # each TS_Measurement object will then be created as a row in the Table TS_Measurement in the Database
       # each TS_Measurement object ts_id links it to the timeseries that was created above
       count = 0 # Count used to prevent more than the vector size from being uploaded (in case of empty spaces in csv)
-      length = int(ts_set.vector_size) # Length of ts_set data
+      length = int(timeseries.length) # Length of ts_set data
       ts_measurements = [] # List of TS_Measurement objects that will be bulk created
       
       for _, temp in series_data.items():
-        if (count <= length):
+        if (count <= length and temp!=''):
           ts_measurement = TS_Measurement(
             x_val = temp,
             ts_id=timeseries
