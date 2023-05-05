@@ -1,7 +1,7 @@
 // import csvDownload from 'json-to-csv-export';
 
 const refresh = document.getElementById("refresh"); 
-const problemTable = document.getElementById("problem-table");
+const problemContainer = document.getElementById("problem-container");
 // const solutionTable = document.getElementById("solution-table");
 
 function generateTable(row, name){
@@ -96,6 +96,7 @@ function downloadSet(setId){
 
 refresh.addEventListener("click", function(e){
     const problemTable = document.createElement("table"); 
+    problemContainer.innerHTML = "";
     document.getElementById("problem-container").appendChild(problemTable);
     fetch("/_get-solution")
         .then(function(response){
@@ -109,6 +110,7 @@ refresh.addEventListener("click", function(e){
         .then(function(data){
             console.log(data);
             problemTable.id = "problem-table";
+            
             const problemHeader = ["Problem Set Number", "Solution", "Download"]; 
             insertHeader(problemTable, problemHeader);
             for(let key in data){
