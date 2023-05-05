@@ -80,8 +80,8 @@ const validate = (files) => {
     for (const file of files) {
         console.log(file);
 
-        const setMeta = file['setMeta']
-        const seriesMeta = file['seriesMeta']
+        const setMeta = file['Solution']['setMeta']
+        const seriesMeta = file['Solution']['seriesMeta']
 
         if (
             setMeta['TS Set Name'] === "" ||
@@ -133,8 +133,7 @@ async function handleFiles(trainFile){
         e.style.display = "inline";
         e.innerHTML = "Invalid file format. Please check " + badFile
     } else {
-        const doubleJson = {trainSet: trainJson}
-        sendFile(JSON.stringify(doubleJson))
+        sendFile(JSON.stringify(trainJson))
     }
 
 }
@@ -149,7 +148,7 @@ const sendFile = (json) => {
         console.log(response)
         if (response.status === 200) {
             let success = document.createElement("div");
-            let img = document/createElement("img");
+            let img = document.createElement("img");
             img.src="../icon/back.png"
             success.appendChild(img);
             document.querySelector('#upSuccess').style.display = "inline";
