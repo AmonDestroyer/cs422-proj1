@@ -156,55 +156,11 @@ def get_solutions():
     
     problem_solutions_dict[f"{problem_set.set_id}"] = solutions_dict
     problem_count += 1
+  
+  # Sort based on error:
+  for key in problem_solutions_dict:
+    problem_solutions_dict[key] = dict(sorted(problem_solutions_dict[key].items(), key=lambda item: item[1]["error"]))
+  
+  print(json.dumps(problem_solutions_dict))
 
   return problem_solutions_dict 
-  
-  
-  
-
-"""def get_solutions(request_body):
-  # data = json.loads(request_body)
-  # set_id = data["set_id"]
-  
-  set_id = '1' # Temporary for now, above code will be used later
-  solutions_dict = {} # Contains all solutions
-  count = 1
-  
-  # Get all the ids of sets linked to the train_set_id
-  # other_set_ids will contain a <QuerySet> object containing the other_set_ids
-  # these ids are only the ids of the sets that are linked with train_set_id
-  other_set_ids = TestTrainingSolution_Join.objects.filter(training_set_id=set_id).values_list('other_set_id', flat=True)
-
-  solution_sets = TS_Set.objects.filter(set_id__in=other_set_ids, set_type_id__set_type=SOLUTION)
-  
-  for solution in solution_sets:
-    solution_info = {} # Dictionary that will be returned to the frontend (converted to JSON) - stores sollution information
-    solution_info.update({
-      "set name": solution.set_name,
-      "error": str(solution.error), # conver to string because JSOn doesn't accept DECIMAL
-    })
-    
-    # Get the paper associated with this ts set
-    # use setpaper_join__set_id to get the paper associated with ts_set in the Set-Paper Join table
-    paper = Paper.objects.get(setpaper_join__set_id=solution)
-    solution_info.update({
-      "paper reference": paper.paper_reference,
-      "paper link": paper.paper_link,
-    })
-    
-    # Get the contributor associated with this ts set
-    # use setcontributor_join__set_id to get the contributor associated with ts_set in the Set-Contributor Join table
-    contributor = Contributor.objects.get(setcontributor_join__set_id=solution)
-    # contributor_id = contributor.contrib_id # not used
-    solution_info.update({
-      "contributor first name": contributor.contrib_fname,
-      "contributor last name": contributor.contrib_lname,
-    })
-  
-    solutions_dict[f"solution{count}"] = solution_info
-    count += 1
-  
-  return_json = json.dumps(solutions_dict)
-  print(return_json)
-
-  return return_json"""
