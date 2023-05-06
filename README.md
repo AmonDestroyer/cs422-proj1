@@ -1,8 +1,8 @@
 # CS422 Project1
-This project is part of the University of Oregon's CS 422 (Software Methodologies) Course taken by thea authros during Spring 2023.
+This project is part of the University of Oregon's CS 422 (Software Methodologies) Course taken by the authors during Spring 2023. Currently being hosted [here](http://137.184.183.225:8000/)
 
 ## Description
-This repository contains the back-end and front-end for a web application dealing with developement of timeseries storage web application. Additional steps will need to be taken to install and create a MySQL database to connect to this applicaiton once built.
+This repository contains the back-end and front-end for a web application dealing with developement of timeseries storage web application. Additional steps will need to be taken to install and create a MySQL database to connect to this application once built.
 
 ## Authors
 Adam Case, Brett Fox, Josh Sawyer, Luke Scribner, and Sophia Zhang
