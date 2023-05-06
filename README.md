@@ -37,7 +37,8 @@ You will need to create a file named ".env" in the /Backend/ directory of the pr
 ## Steps to run locally on Windows
 ####  Steps for running on other OS's are similar, but minor modifications may need to be made, such as replacing 'python' with 'python3' when running commands. If you're experiencing database-related issues, try replacing the database variables in /Backend/TSProject/settings.py such as `'USER': os.environ['USER'],` with the raw values from the .env file.
 
-* Install [python](https://www.python.org/), verify pip is installed using the command: \
+* Install [python](https://www.python.org/) (please ensure you are using version 3.8 to avoid any conflicts)\
+ Verify pip is installed using the command: \
  `python -m ensurepip --upgrade` \
  If pip is not installed, see [here](https://pip.pypa.io/en/stable/installation/)
 
@@ -45,7 +46,8 @@ You will need to create a file named ".env" in the /Backend/ directory of the pr
 * Create .env file in /Backend/ dir (see above)
 * cd to 422-proj1/Backend
 * Run: `pip install pipenv`
-* Run: `pipenv install --dev`
+* **Linux users**: Run the command `sudo apt-get update` then `sudo apt-get libmysqlclient-dev` - this is essential for the mysqlclient package. 
+* Run: `pipenv install` (In the case you wish to use a different version of python (3.8 and above) run `pipenv --python path/to/python(version) install skip-lock) 
 * Run: `pipenv shell`
 * Run: `python manage.py runserver`
 * Navigate to 127.0.0.1:8000 in web browser
