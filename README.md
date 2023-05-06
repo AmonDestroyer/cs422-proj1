@@ -42,7 +42,7 @@ You will need to create a file named ".env" in the root directory of the project
 * cd to 422-proj1/Backend
 * Run: `pip install pipenv`
 * Run: `pipenv install --dev`
-* Run: `pipenv shell\`
+* Run: `pipenv shell`
 * Run: `python manage.py runserver`
 * Navigate to 127.0.0.1:8000 in web browser
 
