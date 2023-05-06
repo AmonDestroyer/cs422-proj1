@@ -47,7 +47,7 @@ You will need to create a file named ".env" in the /Backend/ directory of the pr
 * cd to 422-proj1/Backend
 * Run: `pip install pipenv`
 * **Linux users**: Run the command `sudo apt-get update` then `sudo apt-get libmysqlclient-dev` - this is essential for the mysqlclient package. 
-* Run: `pipenv install` (In the case you wish to use a different version of python (3.8 and above) run `pipenv --python path/to/python(version) install skip-lock) 
+* Run: `pipenv install` (In the case you wish to use a different version of python (3.8 and above) run `pipenv --python path/to/python(version) install skip-lock`) 
 * Run: `pipenv shell`
 * Run: `python manage.py runserver`
 * Navigate to 127.0.0.1:8000 in web browser
