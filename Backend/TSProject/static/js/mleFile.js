@@ -18,7 +18,10 @@ function csvToJson(file) {
         const data = result
         const arr = data.split('\n');
 
-        const metaItems = arr[0].split(',');
+        const problemID = arr[0].split(',')[3]
+        console.log(problemID);
+
+        const metaItems = arr[1].split(',');
         const setMeta = {
             "TS Set Name": metaItems[0],
             "Description": metaItems[1],
@@ -35,15 +38,15 @@ function csvToJson(file) {
         }
 
         const seriesMeta = {
-            "TS Name": arr[10].split(',')[0],
-            "Description": arr[2].split(',')[0],
-            "Domain(s)": arr[3].split(',')[0],
-            "Units": arr[4].split(',')[0],
-            "Keywords": arr[5].split(',')[0],
-            "Scalar/Vector": arr[6].split(',')[0],
-            "Vector Size": arr[7].split(',')[0],
-            "Length": arr[8].split(',')[0],
-            "Sampling Period": arr[9].split(',')[0]
+            "TS Name": arr[2].split(',')[0],
+            "Description": arr[3].split(',')[0],
+            "Domain(s)": arr[4].split(',')[0],
+            "Units": arr[5].split(',')[0],
+            "Keywords": arr[6].split(',')[0],
+            "Scalar/Vector": arr[7].split(',')[0],
+            "Vector Size": arr[8].split(',')[0],
+            "Length": arr[9].split(',')[0],
+            "Sampling Period": arr[10].split(',')[0]
         }
 
         let seriesData = {}
@@ -52,11 +55,14 @@ function csvToJson(file) {
         }
 
         const fullJson = {
-            "setMeta": setMeta,
-            "seriesMeta": seriesMeta,
-            "seriesData": seriesData
+            "ProblemID": problemID,
+            "Solution": {
+                "setMeta": setMeta,
+                "seriesMeta": seriesMeta,
+                "seriesData": seriesData
+            }
         }
-
+        console.log(fullJson);
         return fullJson
     }
 }
