@@ -1,6 +1,7 @@
 # CS422 Project1
 
 ## Description
+An app
 
 ## Authors
 Adam Case, Brett Fox, Josh Sawyer, Luke Scribner, and Sophia Zhang
@@ -23,7 +24,7 @@ Required Packages:
 * tzdata
 
 ## .env File
-You will need to create a file named ".env" in the root directory of the project to be able to run the app locally. The file's content should look like this: \
+You will need to create a file named ".env" in the /Backend/ directory of the project to be able to run the app locally. The file's content should look like this: \
 `SECRET_KEY=93dd754550f9bc00d62576012a920193b88d22a536303c19` \
 `DB_NAME=422` \
 `USER=dev` \
@@ -32,21 +33,26 @@ You will need to create a file named ".env" in the root directory of the project
 `PORT=3070`
 
 
+## Steps to run locally on Windows
+####  Steps for running on other OS's are similar, but minor modifications may need to be made, such as replacing 'python' with 'python3' when running commands. If you're experiencing database-related issues, try replacing the database variables in /Backend/TSProject/settings.py such as `'USER': os.environ['USER'],` with the raw `USER=` values from the .env file.
 
-
-## Steps to run locally
 * Install [python](https://www.python.org/), verify pip is installed using the command: \
  `python -m ensurepip --upgrade` \
  If pip is not installed, see [here](https://pip.pypa.io/en/stable/installation/)
 
 * Clone this repository to your local machine
-* Create .env file in root dir (see above)
+* Create .env file in /Backend/ dir (see above)
 * cd to 422-proj1/Backend
 * Run: `pip install pipenv`
 * Run: `pipenv install --dev`
 * Run: `pipenv shell`
 * Run: `python manage.py runserver`
 * Navigate to 127.0.0.1:8000 in web browser
+
+## Setting up local mysql server
+* Install mysql for your OS and set up a user with full permissions by following the [documentation](https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
+* Once the mysql server is running, run the `proj1_db_generator_v3.sql` script to generate the correct schema and tables
+* Finally, replace the values in the .env file with your new local database information
 
 
 ## Directory structure
