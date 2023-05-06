@@ -1,11 +1,13 @@
+# CS422 Project1
+
 ## Description
 
 ## Authors
 Adam Case, Brett Fox, Josh Sawyer, Luke Scribner, and Sophia Zhang
 
 ## Creation Date
-
-## CS422 Project1
+* 4/6/23: Project Development Began
+* 5/5/23: Project Development Completed
 
 ## Software Dependencies
 Required Software:
