@@ -34,7 +34,7 @@ You will need to create a file named ".env" in the /Backend/ directory of the pr
 
 
 ## Steps to run locally on Windows
-####  Steps for running on other OS's are similar, but minor modifications may need to be made, such as replacing 'python' with 'python3' when running commands. If you're experiencing database-related issues, try replacing the database variables in /Backend/TSProject/settings.py such as `'USER': os.environ['USER'],` with the raw `USER=` values from the .env file.
+####  Steps for running on other OS's are similar, but minor modifications may need to be made, such as replacing 'python' with 'python3' when running commands. If you're experiencing database-related issues, try replacing the database variables in /Backend/TSProject/settings.py such as `'USER': os.environ['USER'],` with the raw values from the .env file.
 
 * Install [python](https://www.python.org/), verify pip is installed using the command: \
  `python -m ensurepip --upgrade` \
