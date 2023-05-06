@@ -1,7 +1,7 @@
 # CS422 Project1
 
 ## Description
-An app
+An app for 
 
 ## Authors
 Adam Case, Brett Fox, Josh Sawyer, Luke Scribner, and Sophia Zhang
