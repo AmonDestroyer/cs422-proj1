@@ -7,9 +7,45 @@ Adam Case, Brett Fox, Josh Sawyer, Luke Scribner, and Sophia Zhang
 
 ## CS422 Project1
 
-## Steps to run locally
-
 ## Software Dependencies
+Required Software:
+* Python 3.8
+* pip
+
+Required Packages:
+* pipenv
+* django
+* mysqlclient
+* scikit-learn
+* pytz
+* tzdata
+
+## .env File
+You will need to create a file named ".env" in the root directory of the project to be able to run the app locally. The file's content should look like this: \
+`SECRET_KEY=93dd754550f9bc00d62576012a920193b88d22a536303c19` \
+`DB_NAME=422` \
+`USER=dev` \
+`PASSWORD=hurricane422` \
+`HOST=ix.cs.uoregon.edu` \
+`PORT=3070`
+
+
+
+
+## Steps to run locally
+* Install [python](https://www.python.org/), verify pip is installed using the command: \
+ `python -m ensurepip --upgrade` \
+ If pip is not installed, see [here](https://pip.pypa.io/en/stable/installation/)
+
+* Clone this repository to your local machine
+* Create .env file in root dir (see above)
+* cd to 422-proj1/Backend
+* Run: `pip install pipenv`
+* Run: `pipenv install --dev`
+* Run: `pipenv shell\`
+* Run: `python manage.py runserver`
+* Navigate to 127.0.0.1:8000 in web browser
+
 
 ## Directory structure
 ### TSProject
